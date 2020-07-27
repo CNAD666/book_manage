@@ -20,8 +20,6 @@ Widget totalPage() {
     children: [
       //侧边栏
       navigationRailSide(),
-      //分割线
-      VerticalDivider(thickness: 1, width: 1),
       //Expanded占满剩下的空间
       Expanded(
         child: Center(
@@ -34,11 +32,24 @@ Widget totalPage() {
 
 //增加NavigationRail组件为侧边栏
 Widget navigationRailSide() {
+  //顶部widget
+  Widget topWidget = FloatingActionButton.extended(
+    icon: Icon(Icons.navigation),
+  );
+
+
+  //底部widget
+  Widget bottomWidget = Text("........");
+
+
   return NavigationRail(
+    //阴影Z轴高度
+    elevation: 3,
     extended: _state.isExtended,
     labelType: _state.isExtended
         ? NavigationRailLabelType.none
         : NavigationRailLabelType.selected,
+    //侧边栏中的item
     destinations: [
       NavigationRailDestination(
           icon: Icon(Icons.add_to_queue),
@@ -49,15 +60,14 @@ Widget navigationRailSide() {
           selectedIcon: Icon(Icons.add_circle),
           label: Text("测试二"))
     ],
+    //顶部widget
+    leading: topWidget,
+    //底部widget
+    trailing: bottomWidget,
     selectedIndex: _state.selectedIndexRail,
     onDestinationSelected: (int index) {
       _dispatch(MainActionCreator.switchTab(index));
-
-      if (index == 0) {
-        _dispatch(MainActionCreator.switchExtended(true));
-      } else {
-        _dispatch(MainActionCreator.switchExtended(false));
-      }
+      _dispatch(MainActionCreator.switchExtended(!_state.isExtended));
     },
   );
 }
