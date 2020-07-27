@@ -6,12 +6,16 @@ import 'state.dart';
 Reducer<MainState> buildReducer() {
   return asReducer(
     <Object, Reducer<MainState>>{
-      MainAction.action: _onAction,
+      MainAction.switchTab: _switchTab,
+      MainAction.switchExtended: _switchExtended,
     },
   );
 }
 
-MainState _onAction(MainState state, Action action) {
-  final MainState newState = state.clone();
-  return newState;
+MainState _switchTab(MainState state, Action action) {
+  return state.clone()..selectedIndexRail = action.payload;
+}
+
+MainState _switchExtended(MainState state, Action action) {
+  return state.clone()..isExtended = action.payload;
 }
