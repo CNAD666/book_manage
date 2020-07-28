@@ -1,3 +1,5 @@
+import 'package:book_web/store/state.dart';
+import 'package:book_web/store/store.dart';
 import 'package:book_web/widget/page/main/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart' hide Page;
@@ -9,12 +11,43 @@ void main() {
 }
 
 Widget createApp() {
+  /// globalUpdate
+  globalUpdate() => (Object pageState, GlobalState appState) {
+    final GlobalBaseState p = pageState;
+
+    if (pageState is Cloneable) {
+      final Object copy = pageState.clone();
+      final GlobalBaseState newState = copy;
+
+      // pageState 属性和 appState 属性不相同，则把 appState 对应的属性赋值给 newState
+      if (p.themeColor != appState.themeColor) {
+        newState.themeColor = appState.themeColor;
+      }
+
+      return newState; // 返回新的 state 并将数据设置到 ui
+    }
+
+    return pageState;
+  };
+
   final AbstractRoutes routes = PageRoutes(
-    pages: <String, Page<Object, dynamic>>{
-      //主页面
-      "main": MainPage(),
-    },
-  );
+      pages: <String, Page<Object, dynamic>>{
+        ///页面管理
+        //主页面
+        "main": MainPage(),
+      },
+
+      ///全局状态管理
+      visitor: (String path, Page<Object, dynamic> page) {
+        if (page.isTypeof<GlobalBaseState>()) {
+          // connectExtraStore 方法将 page store 和 app store 连接起来
+          // globalUpdate() 就是具体的实现逻辑
+          page.connectExtraStore<GlobalState>(
+              GlobalStore.store, globalUpdate());
+        }
+      });
+
+
 
   return MaterialApp(
     title: 'Flutter Book Backstage',
@@ -27,7 +60,7 @@ Widget createApp() {
     onGenerateRoute: (RouteSettings settings) {
       //ios页面切换风格
       return CupertinoPageRoute(builder: (BuildContext context) {
-        autoUi(context);  //界面适配
+        autoUi(context); //界面适配
         return routes.buildPage(settings.name, settings.arguments);
       });
 
@@ -39,7 +72,6 @@ Widget createApp() {
     },
   );
 }
-
 
 //界面适配
 void autoUi(BuildContext context) {
