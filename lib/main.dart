@@ -11,25 +11,6 @@ void main() {
 }
 
 Widget createApp() {
-  /// globalUpdate
-  globalUpdate() => (Object pageState, GlobalState appState) {
-    final GlobalBaseState p = pageState;
-
-    if (pageState is Cloneable) {
-      final Object copy = pageState.clone();
-      final GlobalBaseState newState = copy;
-
-      // pageState 属性和 appState 属性不相同，则把 appState 对应的属性赋值给 newState
-      if (p.themeColor != appState.themeColor) {
-        newState.themeColor = appState.themeColor;
-      }
-
-      return newState; // 返回新的 state 并将数据设置到 ui
-    }
-
-    return pageState;
-  };
-
   final AbstractRoutes routes = PageRoutes(
       pages: <String, Page<Object, dynamic>>{
         ///页面管理
@@ -39,15 +20,27 @@ Widget createApp() {
 
       ///全局状态管理
       visitor: (String path, Page<Object, dynamic> page) {
+        /// 只有特定的范围的 Page 才需要建立和 AppStore 的连接关系
+        /// 满足 Page<T> ，T 是 GlobalBaseState 的子类
         if (page.isTypeof<GlobalBaseState>()) {
-          // connectExtraStore 方法将 page store 和 app store 连接起来
-          // globalUpdate() 就是具体的实现逻辑
-          page.connectExtraStore<GlobalState>(
-              GlobalStore.store, globalUpdate());
+          /// 建立 AppStore 驱动 PageStore 的单向数据连接
+          /// 1. 参数1 AppStore
+          /// 2. 参数2 当 AppStore.state 变化时, PageStore.state 该如何变化
+          page.connectExtraStore<GlobalState>(GlobalStore.store,
+              (Object pageState, GlobalState appState) {
+            final GlobalBaseState p = pageState;
+            if (p.themeColor != appState.themeColor) {
+              if (pageState is Cloneable) {
+                final Object copy = pageState.clone();
+                final GlobalBaseState newState = copy;
+                newState.themeColor = appState.themeColor;
+                return newState;
+              }
+            }
+            return pageState;
+          });
         }
       });
-
-
 
   return MaterialApp(
     title: 'Flutter Book Backstage',
