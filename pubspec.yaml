@@ -31,6 +31,7 @@ dependencies:
   dio: ^3.0.9    #网络请求框架
   intl: ^0.16.1   #解析json中date类型需要的
   json_annotation: ^2.4.0 # json序列化和反序列化用的
+  flutter_screenutil: ^1.0.2  # 界面适配
 
 
 dev_dependencies:
