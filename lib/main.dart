@@ -11,42 +11,47 @@ void main() {
 }
 
 Widget createApp() {
-  final AbstractRoutes routes = PageRoutes(
-      pages: <String, Page<Object, dynamic>>{
-        ///页面管理
-        //主页面
-        "main": MainPage(),
-      },
+  ///全局状态管理
+  _updateState() => (Object pageState, GlobalState appState) {
+        final GlobalBaseState p = pageState;
 
-      ///全局状态管理
-      visitor: (String path, Page<Object, dynamic> page) {
-        /// 只有特定的范围的 Page 才需要建立和 AppStore 的连接关系
-        /// 满足 Page<T> ，T 是 GlobalBaseState 的子类
-        if (page.isTypeof<GlobalBaseState>()) {
-          /// 建立 AppStore 驱动 PageStore 的单向数据连接
-          /// 1. 参数1 AppStore
-          /// 2. 参数2 当 AppStore.state 变化时, PageStore.state 该如何变化
-          page.connectExtraStore<GlobalState>(GlobalStore.store,
-              (Object pageState, GlobalState appState) {
-            final GlobalBaseState p = pageState;
-            if (p.themeColor != appState.themeColor) {
-              if (pageState is Cloneable) {
-                final Object copy = pageState.clone();
-                final GlobalBaseState newState = copy;
-                newState.themeColor = appState.themeColor;
-                return newState;
-              }
-            }
-            return pageState;
-          });
+        if (pageState is Cloneable) {
+          final Object copy = pageState.clone();
+          final GlobalBaseState newState = copy;
+
+          if (p.themeColor != appState.themeColor) {
+            newState.themeColor = appState.themeColor;
+          }
+
+          return newState; // 返回新的 state 并将数据设置到 ui
         }
-      });
+
+        return pageState;
+      };
+
+  ///路由管理
+  final AbstractRoutes routes = PageRoutes(
+    pages: <String, Page<Object, dynamic>>{
+      ///页面管理
+      //主页面
+      "main": MainPage(),
+    },
+
+    ///全局状态管理
+    visitor: (String path, Page<Object, dynamic> page) {
+      /// 只有特定的范围的 Page 才需要建立和 AppStore 的连接关系
+      /// 满足 Page<T> ，T 是 GlobalBaseState 的子类
+      if (page.isTypeof<GlobalBaseState>()) {
+        /// 建立 AppStore 驱动 PageStore 的单向数据连接
+        /// 1. 参数1 AppStore
+        /// 2. 参数2 当 AppStore.state 变化时, PageStore.state 该如何变化
+        page.connectExtraStore<GlobalState>(GlobalStore.store, _updateState());
+      }
+    },
+  );
 
   return MaterialApp(
     title: 'Flutter Book Backstage',
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-    ),
     //作为默认页面
     home: routes.buildPage("main", null),
     //切换页面效果设置
@@ -60,7 +65,8 @@ Widget createApp() {
       //Material页面切换风格
 //      return MaterialPageRoute<Object>(builder: (BuildContext context) {
 //        autoUi(context);  //界面适配
-//        return routes.buildPage(settings.name, settings.arguments);
+//        return routes.buildPage(settings.nam
+//        e, settings.arguments);
 //      });
     },
   );

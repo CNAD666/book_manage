@@ -12,7 +12,16 @@ Reducer<GlobalState> buildReducer(){
   );
 }
 
-GlobalState _onChangeThemeColor(GlobalState state, Action action){
-  final Color color = state.themeColor == Colors.green ? Colors.blue : Colors.green;
-  return state.clone()..themeColor = color;
+
+List<Color> _colors = <Color>[
+  Colors.green,
+  Colors.red,
+  Colors.black,
+  Colors.blue
+];
+
+GlobalState _onChangeThemeColor(GlobalState state, Action action) {
+  final Color next =
+  _colors[((_colors.indexOf(state.themeColor) + 1) % _colors.length)];
+  return state.clone()..themeColor = next;
 }

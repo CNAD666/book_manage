@@ -13,7 +13,8 @@ class MainState implements GlobalBaseState, Cloneable<MainState> {
   MainState clone() {
     return MainState()
       ..selectedIndexRail = selectedIndexRail
-      ..isExtended = isExtended;
+      ..isExtended = isExtended
+      ..themeColor = themeColor;
   }
 
   @override

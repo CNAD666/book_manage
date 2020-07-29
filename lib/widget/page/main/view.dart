@@ -1,3 +1,5 @@
+import 'package:book_web/store/action.dart';
+import 'package:book_web/store/store.dart';
 import 'package:book_web/utils/auto_ui.dart';
 import 'package:book_web/widget/page/main/action.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -12,7 +14,12 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
   _state = state;
   _dispatch = dispatch;
 
-  return Scaffold(body: totalPage());
+  return Scaffold(
+      appBar: AppBar(
+        backgroundColor: state.themeColor,
+        title: Text("Book"),
+      ),
+      body: totalPage());
 }
 
 //构建总体页面
@@ -52,16 +59,16 @@ Widget navigationRailSide() {
 
   //底部widget
   Widget bottomWidget = Container(
-    padding: EdgeInsets.all(0),
     child: FloatingActionButton(
       onPressed: () {
         _dispatch(MainActionCreator.switchExtended(!_state.isExtended));
       },
-      child: Icon(_state.isExtended ? Icons.near_me : Icons.navigation),
+      child: Icon(_state.isExtended ? Icons.send : Icons.navigation),
     ),
   );
 
   return NavigationRail(
+    backgroundColor: Colors.white12,
     //阴影Z轴高度
     elevation: 3,
     extended: _state.isExtended,
@@ -77,7 +84,11 @@ Widget navigationRailSide() {
       NavigationRailDestination(
           icon: Icon(Icons.add_circle_outline),
           selectedIcon: Icon(Icons.add_circle),
-          label: Text("测试二"))
+          label: Text("测试二")),
+      NavigationRailDestination(
+          icon: Icon(Icons.bubble_chart),
+          selectedIcon: Icon(Icons.broken_image),
+          label: Text("变色")),
     ],
     //顶部widget
     leading: topWidget,
@@ -86,6 +97,10 @@ Widget navigationRailSide() {
     selectedIndex: _state.selectedIndexRail,
     onDestinationSelected: (int index) {
       _dispatch(MainActionCreator.switchTab(index));
+      if (index == 2) {
+        //全局变色
+        GlobalStore.store.dispatch(GlobalActionCreator.onChangeThemeColor());
+      }
     },
   );
 }
