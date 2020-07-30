@@ -18,12 +18,8 @@ class MyApp extends StatelessWidget {
     // 也可以在路由跳转的时候进行注册，至于在哪里注册，完全看需求
     // 例如实现主题色的切换，则需要在全局定义，当切换主题色的时候全局切换
     // 又比如只有某个或者某几个特殊界面调用，那么完全可以通过在路由跳转的时候注册
-    return BlocProvider(
-      bloc: ThemeBloc(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: MainPage(),
-      ),
+    return MaterialApp(
+      home: MainPage(),
     );
   }
 }
