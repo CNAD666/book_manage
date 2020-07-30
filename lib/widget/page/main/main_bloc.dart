@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:book_web/base/base_bloc.dart';
 
 class MainBloc extends BaseBloc {
-  int count = 0;
+  int _count = 0;
 
   // stream
   StreamController<int> countController = StreamController<int>();
 
   // 用于通知修改值
   void add() {
-    countController.sink.add(count++);
+    countController.sink.add(_count++);
   }
 
   @override
