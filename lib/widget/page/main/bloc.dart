@@ -1,27 +1,24 @@
 import 'dart:async';
 
 import 'package:book_web/base/base_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MainBloc extends BaseBloc {
-  int _count = 0;
+enum MainEvent { switchTab }
+
+class MainBloc extends Bloc<MainEvent, int> {
   bool isExtended = false;
 
-  // stream
-  StreamController<int> countController = StreamController<int>();
-  StreamController<int> selectController = StreamController<int>();
-
-  // 用于通知修改值
-  void add() {
-    countController.sink.add(_count++);
-  }
-
-  void switchTab(int index) {
-    selectController.sink.add(index);
-  }
+  MainBloc(int initialState) : super(initialState);
 
   @override
-  void dispose() {
-    countController.close(); // 注销资源
-    selectController.close(); // 注销资源
+  Stream<int> mapEventToState(MainEvent event) async* {
+    switch(event) {
+      case MainEvent.switchTab:
+        break;
+    }
   }
+
+
+
+
 }

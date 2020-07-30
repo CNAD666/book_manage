@@ -1,7 +1,10 @@
+import 'dart:js';
+
 import 'package:book_web/base/base_bloc.dart';
 import 'package:book_web/utils/auto_ui.dart';
 import 'package:book_web/widget/page/main/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 MainBloc _bloc;
 
@@ -9,17 +12,14 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 获取注册的 bloc，必须先注册，再去查找
-    return BlocProvider<MainBloc>(
-      bloc: MainBloc(),
-      child: BodyPage(),
-    );
+    return BodyPage();
   }
 }
 
 class BodyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    _bloc = BlocProvider.of<MainBloc>(context);
+    _bloc = MainBloc(0);
 
     return Scaffold(
       appBar: AppBar(title: Text('Stream version of the Counter App')),
@@ -36,14 +36,13 @@ Widget totalPage() {
       //Expanded占满剩下的空间
       Expanded(
           child: Center(
-        child: StreamBuilder<int>(
-            stream: _bloc.countController.stream,
-            initialData: 1,
-            builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-              return Text(
-                  "selectedIndex:" + snapshot.data.toString());
+        child: BlocBuilder<MainBloc, int>(
+          builder: (context, state){
+            return Text(
+                  "selectedIndex:" + state.toString());
             }),
-      ))
+        )
+      )
     ],
   );
 }
@@ -77,10 +76,8 @@ Widget navigationRailSide() {
     ),
   );
 
-  return StreamBuilder<int>(
-      stream: _bloc.selectController.stream,
-      initialData: 0,
-      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+  return BlocBuilder<MainBloc, int>(
+      builder: (context, state) {
         return NavigationRail(
           backgroundColor: Colors.white12,
           //阴影Z轴高度
@@ -108,9 +105,9 @@ Widget navigationRailSide() {
           leading: topWidget,
 //    //底部widget
           trailing: bottomWidget,
-          selectedIndex: snapshot.data,
+          selectedIndex: state,
           onDestinationSelected: (int index) {
-            _bloc.switchTab(index);
+//            _bloc.(MainEvent.switchTab);
             if (index == 2) {
               //全局变色
 
