@@ -1,76 +1,34 @@
-import 'package:book_web/store/state.dart';
-import 'package:book_web/store/store.dart';
-import 'package:book_web/widget/page/main/page.dart';
-import 'package:fish_redux/fish_redux.dart';
+import 'package:book_web/global/theme_bloc.dart';
 import 'package:flutter/cupertino.dart' hide Page;
 import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'base/base_bloc.dart';
+import 'widget/page/main/main_view.dart';
+
 void main() {
-  runApp(createApp());
+  runApp(MyApp());
 }
 
-Widget createApp() {
-  ///全局状态管理
-  _updateState() => (Object pageState, GlobalState appState) {
-        final GlobalBaseState p = pageState;
-
-        if (pageState is Cloneable) {
-          final Object copy = pageState.clone();
-          final GlobalBaseState newState = copy;
-
-          if (p.themeColor != appState.themeColor) {
-            newState.themeColor = appState.themeColor;
-          }
-
-          return newState; // 返回新的 state 并将数据设置到 ui
-        }
-
-        return pageState;
-      };
-
-  ///路由管理
-  final AbstractRoutes routes = PageRoutes(
-    pages: <String, Page<Object, dynamic>>{
-      ///页面管理
-      //主页面
-      "main": MainPage(),
-    },
-
-    ///全局状态管理
-    visitor: (String path, Page<Object, dynamic> page) {
-      /// 只有特定的范围的 Page 才需要建立和 AppStore 的连接关系
-      /// 满足 Page<T> ，T 是 GlobalBaseState 的子类
-      if (page.isTypeof<GlobalBaseState>()) {
-        /// 建立 AppStore 驱动 PageStore 的单向数据连接
-        /// 1. 参数1 AppStore
-        /// 2. 参数2 当 AppStore.state 变化时, PageStore.state 该如何变化
-        page.connectExtraStore<GlobalState>(GlobalStore.store, _updateState());
-      }
-    },
-  );
-
-  return MaterialApp(
-    title: 'Flutter Book Backstage',
-    //作为默认页面
-    home: routes.buildPage("main", null),
-    //切换页面效果设置
-    onGenerateRoute: (RouteSettings settings) {
-      //ios页面切换风格
-      return CupertinoPageRoute(builder: (BuildContext context) {
-        autoUi(context); //界面适配
-        return routes.buildPage(settings.name, settings.arguments);
-      });
-
-      //Material页面切换风格
-//      return MaterialPageRoute<Object>(builder: (BuildContext context) {
-//        autoUi(context);  //界面适配
-//        return routes.buildPage(settings.nam
-//        e, settings.arguments);
-//      });
-    },
-  );
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // 这里对创建的 bloc 类进行注册，如果说有多个 bloc 类的话，可以通过 child 进行嵌套注册即可
+    // 放在最顶层，可以全局调用，当 App 关闭后，销毁所有的 Bloc 资源，
+    // 也可以在路由跳转的时候进行注册，至于在哪里注册，完全看需求
+    // 例如实现主题色的切换，则需要在全局定义，当切换主题色的时候全局切换
+    // 又比如只有某个或者某几个特殊界面调用，那么完全可以通过在路由跳转的时候注册
+    return BlocProvider(
+      bloc: ThemeBloc(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MainPage(),
+      ),
+    );
+  }
 }
+
+
 
 //界面适配
 void autoUi(BuildContext context) {
