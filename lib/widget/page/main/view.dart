@@ -41,45 +41,29 @@ Widget totalPage() {
 //增加NavigationRail组件为侧边栏
 Widget navigationRailSide() {
   //顶部widget
-  Widget topWidget = Container(
-    alignment: Alignment.centerLeft,
-    color: Colors.amber,
+  Widget topWidget = Center(
     child: Padding(
-      padding: const EdgeInsets.only(left: 8),
-      child: Stack(
-
-        children: [
-          Container(
-            color: Colors.deepOrange,
-            child: FloatingActionButton.extended(
-
-              onPressed: () {
-                _dispatch(MainActionCreator.switchExtended(!_state.isExtended));
-              },
-              icon: Icon(_state.isExtended ? Icons.send : Icons.navigation),
-              label: _state.isExtended ? Text("测试") : Container(),
-              isExtended: _state.isExtended,
-              clipBehavior: Clip.none,
-              materialTapTargetSize: MaterialTapTargetSize.padded,
-            ),
-          ),
-        ],
-      )
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+          width: auto(80),
+          height: auto(80),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+                image: NetworkImage(
+                    "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3383029432,2292503864&fm=26&gp=0.jpg"),
+                fit: BoxFit.fill),
+          )),
     ),
   );
 
   //底部widget
-  Widget bottomWidget = Center(
-    child: Container(
-      width: auto(60),
-      height: auto(60),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(
-            image: NetworkImage(
-                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3383029432,2292503864&fm=26&gp=0.jpg"),
-            fit: BoxFit.fill),
-      ),
+  Widget bottomWidget = Container(
+    child: FloatingActionButton(
+      onPressed: () {
+        _dispatch(MainActionCreator.switchExtended(!_state.isExtended));
+      },
+      child: Icon(_state.isExtended ? Icons.send : Icons.navigation),
     ),
   );
 
@@ -109,7 +93,7 @@ Widget navigationRailSide() {
     //顶部widget
     leading: topWidget,
 //    //底部widget
-//    trailing: bottomWidget,
+    trailing: bottomWidget,
     selectedIndex: _state.selectedIndexRail,
     onDestinationSelected: (int index) {
       _dispatch(MainActionCreator.switchTab(index));
