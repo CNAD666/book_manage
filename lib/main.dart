@@ -4,7 +4,7 @@ import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'base/base_bloc.dart';
-import 'widget/page/main/main_view.dart';
+import 'widget/page/main/view.dart';
 
 void main() {
   runApp(MyApp());
