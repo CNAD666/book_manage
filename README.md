@@ -1,6 +1,6 @@
 # book_web
 
-- 学习(读万篇水文，不如看看bloc作者写的文档)
+- 学习(读水文千篇，不如看看bloc作者写的文档)
   - Flutter_Bloc起源：https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/
   - Flutter_Bloc模式优化：https://www.didierboelens.com/2018/12/reactive-programming-streams-bloc-practical-use-cases/
   - Flutter_Bloc诞生：https://medium.com/flutter-community/flutter-bloc-package-295b53e95c5c
