@@ -5,14 +5,14 @@ abstract class MainEvent {
   const MainEvent();
 }
 
-class SwitchTab extends MainEvent{
+class SwitchTabEvent extends MainEvent{
   final int selectedIndex;
 
-  const SwitchTab({@required this.selectedIndex});
+  const SwitchTabEvent({@required this.selectedIndex});
 }
 
-class IsExtend extends MainEvent{
+class IsExtendEvent extends MainEvent{
   final bool isExtended;
 
-  const IsExtend({@required this.isExtended});
+  const IsExtendEvent({@required this.isExtended});
 }
