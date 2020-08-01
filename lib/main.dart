@@ -4,7 +4,7 @@ import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'base/base_bloc.dart';
-import 'widget/page/main/view.dart';
+import 'widget/page/main/main_view.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,11 +13,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // 这里对创建的 bloc 类进行注册，如果说有多个 bloc 类的话，可以通过 child 进行嵌套注册即可
-    // 放在最顶层，可以全局调用，当 App 关闭后，销毁所有的 Bloc 资源，
-    // 也可以在路由跳转的时候进行注册，至于在哪里注册，完全看需求
-    // 例如实现主题色的切换，则需要在全局定义，当切换主题色的时候全局切换
-    // 又比如只有某个或者某几个特殊界面调用，那么完全可以通过在路由跳转的时候注册
     return MaterialApp(
       home: MainPage(),
     );

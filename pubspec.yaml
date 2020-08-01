@@ -28,7 +28,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   flutter_bloc: ^6.0.1 #状态管理框架
-  equatable: ^1.0.0
+  equatable: ^1.2.3
   characters: ^1.0.0
   dio: ^3.0.9    #网络请求框架
   intl: ^0.16.1   #解析json中date类型需要的
