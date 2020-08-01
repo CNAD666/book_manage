@@ -1,9 +1,8 @@
 import 'package:book_web/utils/auto_ui.dart';
-import 'package:book_web/widget/page/main/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'state.dart';
+import 'main_bloc.dart';
 
 class MainPage extends StatelessWidget {
   @override
@@ -30,7 +29,7 @@ Widget totalPage() {
   return Row(
     children: [
       //侧边栏
-      navigationRailSide(),
+      NavigationRailSide(),
       //Expanded占满剩下的空间
       Expanded(child: Center(
         child: BlocBuilder<MainBloc, MainState>(builder: (context, state) {
@@ -42,7 +41,7 @@ Widget totalPage() {
 }
 
 //增加NavigationRail组件为侧边栏
-Widget navigationRailSide() {
+class NavigationRailSide extends StatelessWidget {
   //顶部widget
   Widget topWidget = Center(
     child: Padding(
@@ -74,43 +73,53 @@ Widget navigationRailSide() {
     ),
   );
 
-  return BlocBuilder<MainBloc, MainState>(builder: (context, state) {
-    return NavigationRail(
-      backgroundColor: Colors.white12,
-      //阴影Z轴高度
-      elevation: 3,
-      extended: state.isExtended,
-      labelType: state.isExtended
-          ? NavigationRailLabelType.none
-          : NavigationRailLabelType.selected,
-      //侧边栏中的item
-      destinations: [
-        NavigationRailDestination(
-            icon: Icon(Icons.add_to_queue),
-            selectedIcon: Icon(Icons.add_to_photos),
-            label: Text("测试一")),
-        NavigationRailDestination(
-            icon: Icon(Icons.add_circle_outline),
-            selectedIcon: Icon(Icons.add_circle),
-            label: Text("测试二")),
-        NavigationRailDestination(
-            icon: Icon(Icons.bubble_chart),
-            selectedIcon: Icon(Icons.broken_image),
-            label: Text("变色")),
-      ],
-      //顶部widget
-      leading: topWidget,
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MainBloc, MainState>(builder: (ctx, state) {
+      if(state is NavigationState) {
+        return NavigationRail(
+          backgroundColor: Colors.white12,
+          //阴影Z轴高度
+          elevation: 3,
+          extended: state,
+          labelType: state.isExtended
+              ? NavigationRailLabelType.none
+              : NavigationRailLabelType.selected,
+          //侧边栏中的item
+          destinations: [
+            NavigationRailDestination(
+                icon: Icon(Icons.add_to_queue),
+                selectedIcon: Icon(Icons.add_to_photos),
+                label: Text("测试一")),
+            NavigationRailDestination(
+                icon: Icon(Icons.add_circle_outline),
+                selectedIcon: Icon(Icons.add_circle),
+                label: Text("测试二")),
+            NavigationRailDestination(
+                icon: Icon(Icons.bubble_chart),
+                selectedIcon: Icon(Icons.broken_image),
+                label: Text("变色")),
+          ],
+          //顶部widget
+          leading: topWidget,
 //    //底部widget
-      trailing: bottomWidget,
-      selectedIndex: state.selectIndex,
-      onDestinationSelected: (int index) {
+          trailing: bottomWidget,
+          selectedIndex: state.selectIndex,
+          onDestinationSelected: (int index) {
 //            _bloc.(MainEvent.switchTab);
-        context.bloc<MainBloc>().add(MainEvent.switchTab);
-        if (index == 2) {
-          //全局变色
+            context.bloc<MainBloc>().add(MainEvent.switchTab);
+            if (index == 2) {
+              //全局变色
 
-        }
-      },
-    );
-  });
+            }
+          },
+        );
+      }
+
+      return Text('Something went wrong!');
+    });
+  }
 }
+
+
+
