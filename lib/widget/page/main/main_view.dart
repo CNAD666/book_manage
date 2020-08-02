@@ -24,22 +24,22 @@ class BodyPage extends StatelessWidget {
 }
 
 Widget totalPage() {
+  var _pageController = PageController();
+
   return Row(
     children: [
       //侧边栏
-      navigationRailSide(),
+      _navigationRailSide(),
       //Expanded占满剩下的空间
-      Expanded(child: Center(
-        child: BlocBuilder<MainBloc, MainState>(builder: (context, state) {
-          return Text("selectedIndex:" + state.selectedIndex.toString());
-        }),
-      ))
+      Expanded(
+        child: _mainBodyPage(_pageController),
+      )
     ],
   );
 }
 
 //增加NavigationRail组件为侧边栏
-Widget navigationRailSide() {
+Widget _navigationRailSide() {
   //顶部widget
   Widget topWidget = Center(
     child: Padding(
@@ -65,9 +65,7 @@ Widget navigationRailSide() {
         builder: (context, state) {
           return FloatingActionButton(
             onPressed: () {
-              context
-                  .bloc<MainBloc>()
-                  .add(IsExtendEvent());
+              context.bloc<MainBloc>().add(IsExtendEvent());
             },
             child: Icon(state.isExtended ? Icons.send : Icons.navigation),
           );
@@ -110,4 +108,14 @@ Widget navigationRailSide() {
       },
     );
   });
+}
+
+///NavigationRail右边的区域,使用PageView,主体内容页面
+Widget _mainBodyPage(pageController) {
+  return PageView.builder(
+    physics: NeverScrollableScrollPhysics(),
+    itemCount: 2,
+    itemBuilder: null,
+    controller: pageController,
+  );
 }
