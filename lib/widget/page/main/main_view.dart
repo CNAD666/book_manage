@@ -59,17 +59,20 @@ Widget navigationRailSide() {
 
   //底部widget
   Widget bottomWidget = Container(
-    child: BlocBuilder<MainBloc, MainState>(
-      builder: (context, state) {
-        return FloatingActionButton(
-          onPressed: () {
-            context
-                .bloc<MainBloc>()
-                .add(IsExtendEvent());
-          },
-          child: Icon(state.isExtended ? Icons.send : Icons.navigation),
-        );
-      },
+    child: Container(
+      alignment: Alignment.bottomCenter,
+      child: BlocBuilder<MainBloc, MainState>(
+        builder: (context, state) {
+          return FloatingActionButton(
+            onPressed: () {
+              context
+                  .bloc<MainBloc>()
+                  .add(IsExtendEvent());
+            },
+            child: Icon(state.isExtended ? Icons.send : Icons.navigation),
+          );
+        },
+      ),
     ),
   );
 
