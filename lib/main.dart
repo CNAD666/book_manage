@@ -1,9 +1,7 @@
-import 'package:book_web/global/theme_bloc.dart';
 import 'package:flutter/cupertino.dart' hide Page;
 import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'base/base_bloc.dart';
 import 'widget/page/main/main_view.dart';
 
 void main() {
@@ -18,8 +16,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
 
 //界面适配
 void autoUi(BuildContext context) {

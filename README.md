@@ -5,7 +5,7 @@
   - Flutter_Bloc模式优化：https://www.didierboelens.com/2018/12/reactive-programming-streams-bloc-practical-use-cases/
   - Flutter_Bloc诞生：https://medium.com/flutter-community/flutter-bloc-package-295b53e95c5c
   - Flutter_Bloc官网文档：https://bloclibrary.dev/#/
-
+ 
 - 用Flutter整个web后台管理，该项目使用flutter_bloc状态管理框架来写
   - flutter_bloc：https://pub.dev/packages/flutter_bloc
 - 接口
