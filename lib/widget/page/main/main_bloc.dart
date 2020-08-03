@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:book_web/widget/page/home/home_view.dart';
+import 'package:book_web/widget/page/setting/setting_view.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 part 'main_event.dart';

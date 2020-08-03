@@ -1,11 +1,15 @@
 part of 'main_bloc.dart';
 
-class MainState{
-   int selectedIndex;
-   bool isExtended;
+class MainState {
+  int selectedIndex;
+  bool isExtended;
 
-   MainState({this.selectedIndex, this.isExtended});
+  //PageView页面
+  List<Widget> pageList = [
+    HomePage(),
+    SettingPage(),
+    HomePage(),
+  ];
 
-  @override
-  List<Object> get props => [selectedIndex, isExtended];
+  MainState({this.selectedIndex, this.isExtended});
 }

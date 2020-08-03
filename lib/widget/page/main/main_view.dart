@@ -29,7 +29,7 @@ Widget totalPage() {
   return Row(
     children: [
       //侧边栏
-      _navigationRailSide(),
+      _navigationRailSide(_pageController),
       //Expanded占满剩下的空间
       Expanded(
         child: _mainBodyPage(_pageController),
@@ -39,7 +39,7 @@ Widget totalPage() {
 }
 
 //增加NavigationRail组件为侧边栏
-Widget _navigationRailSide() {
+Widget _navigationRailSide(PageController pageController) {
   //顶部widget
   Widget topWidget = Center(
     child: Padding(
@@ -105,6 +105,7 @@ Widget _navigationRailSide() {
       selectedIndex: state.selectedIndex,
       onDestinationSelected: (int index) {
         context.bloc<MainBloc>().add(SwitchTabEvent(selectedIndex: index));
+        pageController.jumpToPage(index);
       },
     );
   });
@@ -112,10 +113,16 @@ Widget _navigationRailSide() {
 
 ///NavigationRail右边的区域,使用PageView,主体内容页面
 Widget _mainBodyPage(pageController) {
-  return PageView.builder(
-    physics: NeverScrollableScrollPhysics(),
-    itemCount: 2,
-    itemBuilder: null,
-    controller: pageController,
+  MainState _state = MainState();
+
+  return BlocBuilder<MainBloc, MainState>(
+    builder: (context, state) {
+      return PageView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: _state.pageList.length,
+        itemBuilder: (context, index) => _state.pageList[index],
+        controller: pageController,
+      );
+    },
   );
 }
