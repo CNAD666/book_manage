@@ -59,6 +59,7 @@ Widget _navigationRailSide(PageController pageController) {
 
   //底部widget
   Widget bottomWidget = Container(
+    color: Colors.lightBlueAccent,
     child: Container(
       alignment: Alignment.bottomCenter,
       child: BlocBuilder<MainBloc, MainState>(
