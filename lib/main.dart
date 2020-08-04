@@ -1,3 +1,4 @@
+import 'package:book_web/widget/page/home/home_view.dart';
 import 'package:flutter/cupertino.dart' hide Page;
 import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainPage(),
+      home: HomePage(),
     );
   }
 }

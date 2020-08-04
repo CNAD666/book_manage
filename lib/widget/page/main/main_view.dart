@@ -1,3 +1,4 @@
+import 'package:book_web/utils/auto_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -59,19 +60,17 @@ Widget _navigationRailSide(PageController pageController) {
 
   //底部widget
   Widget bottomWidget = Container(
-    color: Colors.lightBlueAccent,
-    child: Container(
-      alignment: Alignment.bottomCenter,
-      child: BlocBuilder<MainBloc, MainState>(
-        builder: (context, state) {
-          return FloatingActionButton(
-            onPressed: () {
-              context.bloc<MainBloc>().add(IsExtendEvent());
-            },
-            child: Icon(state.isExtended ? Icons.send : Icons.navigation),
-          );
-        },
-      ),
+    alignment: Alignment.bottomCenter,
+    margin: EdgeInsets.only(top: auto(250)),
+    child: BlocBuilder<MainBloc, MainState>(
+      builder: (context, state) {
+        return FloatingActionButton(
+          onPressed: () {
+            context.bloc<MainBloc>().add(IsExtendEvent());
+          },
+          child: Icon(state.isExtended ? Icons.send : Icons.navigation),
+        );
+      },
     ),
   );
 
