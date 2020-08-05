@@ -7,6 +7,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Stack(
+        fit: StackFit.expand,
         children: [
           Image.network(
             PIC_HOME_BG,
@@ -21,9 +22,13 @@ class HomePage extends StatelessWidget {
 
 
 Widget body() {
-  return Container(
-    width: 100,
-    height: 100,
-    color: Colors.lightBlueAccent,
+  return Stack(
+    children: [
+      Container(
+        width: 100,
+        height: 100,
+        color: Colors.lightBlueAccent,
+      ),
+    ],
   );
 }
