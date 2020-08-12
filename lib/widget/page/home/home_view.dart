@@ -26,14 +26,10 @@ Widget _pageBg() {
 Widget _body() {
   return Container(
     alignment: Alignment.center,
-    child:Stack(
-      children: [
-        Container(
-          width: 1000,
-          height: 500,
-          color: Color(0x9FFFFFFF),
-        ),
-      ],
+    child:Container(
+      width: 1000,
+      height: 500,
+      color: Color(0x9FFFFFFF),
     ),
   );
 }
