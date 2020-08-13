@@ -1,6 +1,7 @@
 part of 'home_bloc.dart';
 
-@immutable
-abstract class HomeState {}
+class HomeState {
+  ///主页背景图片
+  String homeBg = ImageUrl.PIC_HOME_BG;
+}
 
-class HomeInitial extends HomeState {}
