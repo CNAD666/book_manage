@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:book_web/bean/home/home_bg_bean.dart';
 import 'package:book_web/http/url.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -17,16 +19,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    changeBg();
+    if (event is ChangeBgEvent) {
+      yield await changeBg();
+    }
   }
 
   ///切换背景
-  Stream<HomeState> changeBg() async* {
-    String picApi = "ttps://api.ixiaowai.cn/api/api.php";
+  Future<HomeState> changeBg() async {
+    String picApi = "https://img.xjh.me/random_img.php?return=json";
     Response response = await Dio().get(picApi);
-    String picUrl = response.toString();
-
-    yield HomeState()..homeBg = picUrl;
+    HomeBgBean homeBgBean =
+    HomeBgBean().fromJson(json.decode(response.toString()));
+    String picUrl = "https:" + homeBgBean.img;
+    return HomeState()..homeBg = picUrl;
   }
-
 }

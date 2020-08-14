@@ -39,7 +39,7 @@ Widget _body() {
       child: Container(
         width: 1000,
         height: 500,
-        color: Color(0x9FFFFFFF),
+        color: Color(0x1F000000),
         child: Center(
           child: FloatingActionButton(onPressed: () {
             context.bloc<HomeBloc>().add(ChangeBgEvent());
