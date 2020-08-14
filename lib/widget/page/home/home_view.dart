@@ -1,4 +1,3 @@
-import 'package:book_web/http/url.dart';
 import 'package:book_web/widget/page/home/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +10,8 @@ class HomePage extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
+          ///Loading加载动画
+          Center(child: Image.asset("assets/images/loading.gif")),
           _pageBg(),
           _body(),
         ],
@@ -33,7 +34,7 @@ Widget _pageBg() {
 
 ///主体body模块
 Widget _body() {
-  return BlocBuilder<HomeBloc, HomeState>(builder: (context, state){
+  return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
     return Container(
       alignment: Alignment.center,
       child: Container(
@@ -42,7 +43,7 @@ Widget _body() {
         color: Color(0x1F000000),
         child: Center(
           child: FloatingActionButton(onPressed: () {
-            context.bloc<HomeBloc>().add(ChangeBgEvent());
+            context.bloc<HomeBloc>().add(ChangeBgEvent(state.homeBg));
           }),
         ),
       ),

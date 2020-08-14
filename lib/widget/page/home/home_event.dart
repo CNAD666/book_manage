@@ -7,5 +7,7 @@ abstract class HomeEvent{
 
 ///更换被背景图
 class ChangeBgEvent extends HomeEvent{
-  ChangeBgEvent();
+  final String picUrl;
+
+  ChangeBgEvent(this.picUrl);
 }
