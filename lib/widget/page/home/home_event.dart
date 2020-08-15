@@ -7,7 +7,12 @@ abstract class HomeEvent{
 
 ///更换被背景图
 class ChangeBgEvent extends HomeEvent{
-  final String picUrl;
+  ChangeBgEvent();
+}
 
-  ChangeBgEvent(this.picUrl);
+///状态切换
+class StatusSwitchEvent extends HomeEvent{
+  final bool isLoading;
+
+  StatusSwitchEvent(this.isLoading);
 }

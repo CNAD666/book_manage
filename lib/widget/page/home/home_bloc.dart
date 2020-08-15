@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 part 'home_event.dart';
+
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
@@ -17,11 +18,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is ChangeBgEvent) {
-      yield await changeHDBg(event);
+      yield await changeHDBg();
+    } else if (event is StatusSwitchEvent) {
+      yield statusSwitch(event);
     }
   }
 
-  ///切换背景
+  ///切换背景 岁月小筑(图片质量较差)
   Future<HomeState> changeBg() async {
     String picApi = "https://img.xjh.me/random_img.php?return=json";
     Response response = await Dio().get(picApi).catchError(print);
@@ -32,19 +35,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   ///切换背景 小歪APi
-  Future<HomeState> changeHDBg(ChangeBgEvent event) async {
-    ///二次元动漫
-    String picUrlOne = "https://api.ixiaowai.cn/api/api.php";
+  Future<HomeState> changeHDBg() async {
+    String time = new DateTime.now().toIso8601String();
+    return HomeState()..homeBg = PicUrl.PIC_ANIME + "?$time";
+  }
 
-    ///mc酱动漫
-    String picUrlTwo = "https://api.ixiaowai.cn/mcapi/mcapi.php";
-
-    ///高清壁纸
-    String picUrlThree = "https://api.ixiaowai.cn/gqapi/gqapi.php";
-    if (event.picUrl == picUrlOne) {
-      return HomeState()..homeBg = picUrlTwo;
-    } else {
-      return HomeState()..homeBg = picUrlOne;
-    }
+  HomeState statusSwitch(StatusSwitchEvent event) {
+    return HomeState()
+        ..isLoading = event.isLoading
+        ..homeBg = state.homeBg;
   }
 }
