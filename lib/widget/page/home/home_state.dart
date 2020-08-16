@@ -3,10 +3,13 @@ part of 'home_bloc.dart';
 class HomeState {
   ///是否出入loading状态
   bool isLoading;
+
   ///背景类型  二次元动漫   mc动漫  高清风景
   List<BgTypeBean> bgTypeList;
+
   ///被选择的背景
   BgTypeBean selectedBgType;
+
   ///缓存上一张背景数据
   String lastBgUrl;
 
