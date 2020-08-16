@@ -1,10 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-import 'package:book_web/bean/home/home_bg_bean.dart';
 import 'package:book_web/http/url.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
@@ -18,31 +15,29 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is ChangeBgEvent) {
-      yield await changeHDBg();
+      yield changeHDBg();
     } else if (event is StatusSwitchEvent) {
-      yield statusSwitch(event);
+      yield switchStatus(event);
+    } else if (event is SwitchBgTypeEvent) {
+      yield switchBgTye(event);
     }
   }
 
-  ///切换背景 岁月小筑(图片质量较差)
-  Future<HomeState> changeBg() async {
-    String picApi = "https://img.xjh.me/random_img.php?return=json";
-    Response response = await Dio().get(picApi).catchError(print);
-    HomeBgBean homeBgBean =
-        HomeBgBean().fromJson(json.decode(response.toString()));
-    String picUrl = "https:" + homeBgBean.img;
-    return HomeState()..homeBg = picUrl;
-  }
-
   ///切换背景 小歪APi
-  Future<HomeState> changeHDBg() async {
+  HomeState changeHDBg() {
     String time = new DateTime.now().toIso8601String();
-    return HomeState()..homeBg = PicUrl.PIC_ANIME + "?$time";
+    return state.clone()
+      ..lastBgUrl = state.selectedBgType.url
+      ..selectedBgType.url = state.selectedBgType.url + "?$time";
   }
 
-  HomeState statusSwitch(StatusSwitchEvent event) {
-    return HomeState()
-        ..isLoading = event.isLoading
-        ..homeBg = state.homeBg;
+  ///切换状态(每次背景图片状态切换都会调用该方法)
+  HomeState switchStatus(StatusSwitchEvent event) {
+    return state.clone()..isLoading = event.isLoading;
+  }
+
+  ///切换背景类型
+  HomeState switchBgTye(SwitchBgTypeEvent event) {
+    return state.clone()..selectedBgType = event.bgTypeBean;
   }
 }

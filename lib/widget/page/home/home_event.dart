@@ -16,3 +16,15 @@ class StatusSwitchEvent extends HomeEvent{
 
   StatusSwitchEvent(this.isLoading);
 }
+
+///跳转登录页面
+class ToLoginEvent extends HomeEvent{
+  ToLoginEvent();
+}
+
+///切换背景类型
+class SwitchBgTypeEvent extends HomeEvent{
+  final BgTypeBean bgTypeBean;
+
+  SwitchBgTypeEvent(this.bgTypeBean);
+}
