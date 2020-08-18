@@ -32,11 +32,11 @@ class HomeState {
   ///创建克隆对象方法
   HomeState clone() {
     return HomeState()
-      ..isLoading = this.isLoading
-      ..selectedBgType = this.selectedBgType
-      ..lastBgUrl = this.lastBgUrl
-      ..isHide = this.isHide
-      ..bgTypeList = this.bgTypeList;
+      ..isLoading = isLoading
+      ..selectedBgType = selectedBgType
+      ..lastBgUrl = lastBgUrl
+      ..isHide = isHide
+      ..bgTypeList = bgTypeList;
   }
 }
 

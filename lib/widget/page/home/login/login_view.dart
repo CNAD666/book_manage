@@ -12,14 +12,16 @@ class LoginPage extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => LoginBloc(),
       child: Scaffold(
-        body: _body(),
+        body: _body(context),
       ),
     );
   }
 }
 
 ///主体内容：该主体分左右俩部分  左边：图片背景  右边：登陆相关信息
-Widget _body() {
+Widget _body(BuildContext context) {
+  BlocProvider.of<LoginBloc>(context).add(InitEvent());
+
   return Row(
     children: [
       Expanded(
@@ -41,7 +43,9 @@ Widget _leftPicContent() {
       //背景
       ConstrainedBox(
         constraints: BoxConstraints.expand(),
-        child: Image.network(PicUrl.PIC_ANIME + "?${DateTime.now().toIso8601String()}", fit: BoxFit.cover),
+        child: Image.network(
+            PicUrl.PIC_ANIME + "?${DateTime.now().toIso8601String()}",
+            fit: BoxFit.cover),
       ),
       //顶部背景和小提示
       Container(
@@ -57,53 +61,55 @@ Widget _leftPicContent() {
 
 ///顶部背景条和文字内容
 Widget _bottomTipMsg() {
-  return Stack(
-    children: [
-      ClipRect(
-        //毛玻璃背景
-        child: BackdropFilter(
-          //设置图片模糊度 配套ClipRect使用，不然会造成全局模糊：BackdropFilter-毛玻璃效果
-          filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-          child: Opacity(
-            opacity: 0.1,
-            child: Container(color: Colors.black),
-          ),
-        ),
-      ),
-
-      //文字信息
-      Column(
-        children: [
-          ///上面显示文字
-          Container(
-            padding: EdgeInsets.only(right: auto(120), top: auto(20)),
-            alignment: Alignment.topRight,
-            child: Text(
-              "Good Morning!",
-              style: TextStyle(
-                fontSize: auto(50),
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+  return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+    return Stack(
+      children: [
+        ClipRect(
+          //毛玻璃背景
+          child: BackdropFilter(
+            //设置图片模糊度 配套ClipRect使用，不然会造成全局模糊：BackdropFilter-毛玻璃效果
+            filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+            child: Opacity(
+              opacity: 0.1,
+              child: Container(color: Colors.black),
             ),
           ),
+        ),
 
-          ///下方小一号的显示文字
-          Container(
-              alignment: Alignment.bottomRight,
-              padding: EdgeInsets.only(right: auto(70), top: auto(10)),
+        //文字信息
+        Column(
+          children: [
+            ///上面显示文字
+            Container(
+              padding: EdgeInsets.only(right: auto(120), top: auto(20)),
+              alignment: Alignment.topRight,
               child: Text(
-                "- Bing Provider",
+                state.loginTip.msg,
                 style: TextStyle(
-                  fontSize: auto(20),
+                  fontSize: auto(50),
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
-              ))
-        ],
-      ),
-    ],
-  );
+              ),
+            ),
+
+            ///下方小一号的显示文字
+            Container(
+                alignment: Alignment.bottomRight,
+                padding: EdgeInsets.only(right: auto(70), top: auto(10)),
+                child: Text(
+                  state.loginTip.subMsg,
+                  style: TextStyle(
+                    fontSize: auto(20),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ))
+          ],
+        ),
+      ],
+    );
+  });
 }
 
 ///右边登录布局
