@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       onGenerateRoute: Application.router.generator,
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }

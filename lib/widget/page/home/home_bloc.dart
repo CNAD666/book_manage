@@ -16,6 +16,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
+
     if (event is ChangeBgEvent) {
       //切换背景
       yield changeHDBg();

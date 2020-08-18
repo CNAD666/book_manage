@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:book_web/http/url.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
@@ -27,7 +28,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     String msg = "";
     if (a >= 0 && a <= 6) {
-      msg = "深夜了，注意消息哟";
+      msg = "深夜了，注意休息哟";
     }
     if (a > 6 && a <= 12) {
       msg = "Good Morning";
@@ -36,11 +37,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       msg = "Good Afternoon";
     }
     if (a > 13 && a <= 18) {
-      msg = "下午了，努力工作";
+      msg = "下午了，干劲十足，努力工作";
     }
     if (a > 18 && a <= 24) {
       msg = "Good Evening";
     }
+
+    print("-----++++++++++");
 
     return state.clone()
         ..loginTip.msg = msg

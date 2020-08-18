@@ -37,6 +37,8 @@ Widget _pageBg() {
     builder: (context, state) {
       return ExtendedImage.network(
         state.selectedBgType.url,
+        ///关闭默认的加载动画
+        enableLoadState: false,
         loadStateChanged: (ExtendedImageState extendedState) {
           switch (extendedState.extendedImageLoadState) {
             case LoadState.loading:
