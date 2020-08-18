@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:book_web/http/url.dart';
 import 'package:book_web/utils/auto_ui.dart';
 import 'package:book_web/widget/page/home/login/login_bloc.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,7 +41,7 @@ Widget _leftPicContent() {
       //背景
       ConstrainedBox(
         constraints: BoxConstraints.expand(),
-        child: Image.network(PicUrl.PIC_ANIME, fit: BoxFit.cover),
+        child: Image.network(PicUrl.PIC_ANIME + "?${DateTime.now().toIso8601String()}", fit: BoxFit.cover),
       ),
       //顶部背景和小提示
       Container(
@@ -80,7 +79,7 @@ Widget _bottomTipMsg() {
             padding: EdgeInsets.only(right: auto(120), top: auto(20)),
             alignment: Alignment.topRight,
             child: Text(
-              "Good Evening!",
+              "Good Morning!",
               style: TextStyle(
                 fontSize: auto(50),
                 fontWeight: FontWeight.bold,
@@ -88,9 +87,10 @@ Widget _bottomTipMsg() {
               ),
             ),
           ),
+
           ///下方小一号的显示文字
           Container(
-            alignment: Alignment.bottomRight,
+              alignment: Alignment.bottomRight,
               padding: EdgeInsets.only(right: auto(70), top: auto(10)),
               child: Text(
                 "- Bing Provider",
@@ -99,8 +99,7 @@ Widget _bottomTipMsg() {
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
-              )
-          )
+              ))
         ],
       ),
     ],

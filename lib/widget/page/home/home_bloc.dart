@@ -2,10 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:book_web/http/url.dart';
+import 'package:book_web/routes/navigator_util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 part 'home_event.dart';
+
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
@@ -14,11 +17,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is ChangeBgEvent) {
+      //切换背景
       yield changeHDBg();
     } else if (event is StatusSwitchEvent) {
+      //切换背景时,背景加载时处于不同的状态特征
       yield switchStatus(event);
     } else if (event is SwitchBgTypeEvent) {
+      //切换背景类型
       yield switchBgTye(event);
+    } else if (event is ToLoginEvent) {
+      //跳转登录页面
+      toLogin(event);
+    } else if (event is SwitchHideContainer) {
+      yield isHide();
     }
   }
 
@@ -38,5 +49,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ///切换背景类型
   HomeState switchBgTye(SwitchBgTypeEvent event) {
     return state.clone()..selectedBgType = event.bgTypeBean;
+  }
+
+  ///跳转到登录
+  void toLogin(ToLoginEvent event) {
+    NavigatorUtil.goLoginPage(event.context);
+  }
+
+  HomeState isHide() {
+    return state.clone()..isHide = !state.isHide;
   }
 }

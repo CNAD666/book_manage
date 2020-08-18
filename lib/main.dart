@@ -1,5 +1,7 @@
+import 'package:book_web/routes/application.dart';
+import 'package:book_web/routes/routes.dart';
 import 'package:book_web/widget/page/home/home_view.dart';
-import 'package:book_web/widget/page/home/login/login_view.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart' hide Page;
 import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +15,13 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //路由初始化代码
+    final router = Router();
+    Routes.configureRoutes(router);
+    Application.router = router;
+
     return MaterialApp(
+      onGenerateRoute: Application.router.generator,
       home: HomePage(),
     );
   }

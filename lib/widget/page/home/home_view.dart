@@ -54,6 +54,8 @@ Widget _pageBg() {
               );
               break;
             case LoadState.failed:
+              //关闭loading
+              context.bloc<HomeBloc>().add(StatusSwitchEvent(false));
               return Text("加载失败，请重试！");
               break;
           }
@@ -77,7 +79,15 @@ Widget _body() {
           _contentBodyBg(),
 
           ///毛玻璃上的内容体
-          _contentBody(),
+          Column(
+            children: [
+              ///第一排的功能：切换背景类型  切换背景   登陆
+              _firstRowFunction(),
+
+              ///其它内容区域
+//              _otherContent(),
+            ],
+          )
         ],
       ),
     ),
@@ -114,7 +124,7 @@ Widget _contentBodyBg() {
 }
 
 ///背景毛玻璃效果上的内容体
-Widget _contentBody() {
+Widget _firstRowFunction() {
   return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -149,12 +159,49 @@ Widget _contentBody() {
         Padding(
           padding: EdgeInsets.all(auto(10)),
           child: FlatButton.icon(
-            onPressed: () => context.bloc<HomeBloc>().add(ToLoginEvent()),
+            onPressed: () =>
+                context.bloc<HomeBloc>().add(ToLoginEvent(context)),
             label: Text("登录"),
             icon: Icon(Icons.person),
           ),
         ),
       ],
     );
+  });
+}
+
+
+
+///测试布局内容,暂不需要
+Widget _otherContent() {
+  return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+    return Column(children: [
+      ///切换按钮
+      Container(
+        padding: EdgeInsets.only(bottom: auto(10)),
+        child: FloatingActionButton(
+          onPressed: () => context.bloc<HomeBloc>().add(SwitchHideContainer()),
+          child: Text("切换"),
+        ),
+      ),
+
+      ///布局模块
+      AnimatedCrossFade(
+        firstChild: Container(),
+        secondChild: Container(
+          height: 100,
+          color: Colors.deepOrange,
+        ),
+        crossFadeState:
+            state.isHide ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+        duration: Duration(milliseconds: 5000),
+      ),
+
+      ///下方布局
+      Container(
+        height: 100,
+        color: Colors.blueAccent,
+      ),
+    ]);
   });
 }

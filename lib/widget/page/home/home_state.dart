@@ -13,6 +13,10 @@ class HomeState {
   ///缓存上一张背景数据
   String lastBgUrl;
 
+  ///是否隐藏控件
+  bool isHide;
+
+
   HomeState() {
     this.isLoading = false;
     this.bgTypeList = [
@@ -22,6 +26,7 @@ class HomeState {
     ];
     this.selectedBgType = bgTypeList[0];
     this.lastBgUrl = "";
+    this.isHide = false;
   }
 
   ///创建克隆对象方法
@@ -30,6 +35,7 @@ class HomeState {
       ..isLoading = this.isLoading
       ..selectedBgType = this.selectedBgType
       ..lastBgUrl = this.lastBgUrl
+      ..isHide = this.isHide
       ..bgTypeList = this.bgTypeList;
   }
 }
