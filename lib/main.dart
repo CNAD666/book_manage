@@ -1,13 +1,11 @@
-import 'package:book_web/routes/application.dart';
-import 'package:book_web/routes/routes.dart';
-import 'package:book_web/widget/page/home/home_view.dart';
-import 'package:book_web/widget/page/home/login/login_view.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart' hide Page;
 import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'widget/page/main/main_view.dart';
+import 'app/routes/application.dart';
+import 'app/routes/routes.dart';
+import 'module/home/home_view.dart';
 
 void main() {
   runApp(MyApp());
