@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 import 'application.dart';
@@ -15,5 +17,12 @@ class NavigatorUtil {
     /// Routes.home 路由地址
     /// replace：true 将上级页面给替换掉了，这点后退键的时候就不会再出现上级页面  false：就是不替换
     Application.router.navigateTo(context, Routes.login, replace: false);
+  }
+
+  /// 跳转到登录页面
+  static void goMainPage(BuildContext context) {
+    /// Routes.home 路由地址
+    /// replace：true 将上级页面给替换掉了，这点后退键的时候就不会再出现上级页面  false：就是不替换
+    Application.router.navigateTo(context, Routes.main, replace: true);
   }
 }

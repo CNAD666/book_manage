@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:book_web/http/url.dart';
-import 'package:book_web/views/module/bg/bg_info.dart';
-import 'package:book_web/views/module/bg/impl/bing_bg_info_impl.dart';
+import 'package:book_web/app/routes/navigator_util.dart';
+import 'package:book_web/http/pic_url.dart';
+import 'package:book_web/views/common/bg_info/bg_info.dart';
+import 'package:book_web/views/common/bg_info/impl/bing_bg_info_impl.dart';
 import 'package:intl/intl.dart';
 
 import 'login_event.dart';
@@ -16,12 +17,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     /// 初始化操作
     if (event is InitEvent) {
-      yield await init();
+      yield await _init();
+    }else if(event is ToMainPageEvent){
+      _toMainPage(event);
     }
   }
 
   ///初始化操作
-  Future<LoginState> init() async{
+  Future<LoginState> _init() async{
     DateFormat dateFormat = DateFormat("HH");
     String dateStr = dateFormat.format(DateTime.now());
     int a = int.parse(dateStr);
@@ -39,14 +42,21 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       msg = "Good Evening";
     }
 
+    //切换不同壁纸,切换不同实现方法即可
     BgInfo bgInfo = BingBgInfoImpl();
+
     BgInfoBean bgInfoBean = await bgInfo.getBgInfo();
 
-    String loginBg = PicUrl.PIC_ANIME + "?${DateTime.now().toIso8601String()}";
-
     return state.clone()
-      ..loginBg = loginBg
+      ..loginBg = bgInfoBean.picUrl
       ..loginTip.msg = msg
-      ..loginTip.subMsg = "- Bing Provider";
+      ..loginTip.subMsg = "- ${bgInfoBean.picName}";
   }
+
+
+
+  void _toMainPage(ToMainPageEvent event){
+    NavigatorUtil.goMainPage(event.context);
+  }
+
 }

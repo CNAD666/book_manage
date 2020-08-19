@@ -6,6 +6,7 @@ import 'route_handler.dart';
 class Routes {
   static String home = "/";
   static String login = "/login";
+  static String main = "/main";
 
   static void configureRoutes(Router router) {
 
@@ -17,6 +18,7 @@ class Routes {
     /// 我这边先不设置默认的转场动画，转场动画在下面会讲，可以在另外一个地方设置（可以看NavigatorUtil类）
     router.define(home, handler: homePageHandler);
     router.define(login, handler: loginPageHandler);
+    router.define(main, handler: mainPageHandler);
 
   }
 }

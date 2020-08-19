@@ -1,9 +1,12 @@
+import 'package:book_web/views/common/bg_info/bg_info.dart';
 import 'package:flutter/material.dart';
 import 'home_state.dart';
 
 @immutable
 abstract class HomeEvent {
-  const HomeEvent();
+}
+
+class InitEvent extends HomeEvent {
 }
 
 ///更换被背景图
@@ -27,9 +30,9 @@ class ToLoginEvent extends HomeEvent {
 
 ///切换背景类型
 class SwitchBgTypeEvent extends HomeEvent {
-  final BgTypeBean bgTypeBean;
+  final BgInfoBean bgInfoBean;
 
-  SwitchBgTypeEvent(this.bgTypeBean);
+  SwitchBgTypeEvent(this.bgInfoBean);
 }
 
 

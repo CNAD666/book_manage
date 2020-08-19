@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:book_web/app/utils/ui/auto_ui.dart';
-import 'package:book_web/http/url.dart';
+import 'package:book_web/http/pic_url.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (BuildContext context) => HomeBloc(),
+        create: (BuildContext context) => HomeBloc()..add(InitEvent()),
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -39,7 +39,7 @@ Widget _pageBg() {
   return BlocBuilder<HomeBloc, HomeState>(
     builder: (context, state) {
       return ExtendedImage.network(
-        state.selectedBgType.url,
+        state.selectedBgType.picUrl,
 
         ///关闭默认的加载动画
         enableLoadState: false,
@@ -55,7 +55,7 @@ Widget _pageBg() {
               //loading结束
               context.bloc<HomeBloc>().add(StatusSwitchEvent(false));
               return ExtendedImage.network(
-                state.selectedBgType.url,
+                state.selectedBgType.picUrl,
                 fit: BoxFit.fill,
               );
               break;
@@ -140,8 +140,8 @@ Widget _firstRowFunction() {
           padding: EdgeInsets.all(auto(10)),
           child: DropdownButtonHideUnderline(
             child: DropdownButton(
-              items: state.bgTypeList
-                  .map((e) => DropdownMenuItem(value: e, child: Text(e.name)))
+              items: state.bgInfoList
+                  .map((e) => DropdownMenuItem(value: e, child: Text(e.picName)))
                   .toList(),
               value: state.selectedBgType,
               onChanged: (value) {

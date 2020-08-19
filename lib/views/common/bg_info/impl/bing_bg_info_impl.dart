@@ -1,38 +1,49 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
+
 import '../bg_info.dart';
 
-class BingBgInfoImpl implements BgInfo{
+class BingBgInfoImpl implements BgInfo {
   @override
-  Future<BgInfoBean> getBgInfo() async{
-    String host = "https://cn.bing.com";
-    String api = host +  "/HPImageArchive.aspx";
+  Future<BgInfoBean> getBgInfo() async {
+    try {
+      ///下述为必应接口,在web上执行存在跨域问题,暂且不用
+      if (1 != 1) {
+        String host = "https://cn.bing.com";
+        String api = host + "/HPImageArchive.aspx";
+        Map<String, dynamic> queryMap = {
+          //返回数据格式，不存在返回xml格式js (一般使用这个，返回json格式)xml（返回xml格式）
+          "format": "js",
+          //请求图片截止天数0 今天-1 截止中明天 （预准备的）1 截止至昨天，类推（目前最多获取到7天前的图片）
+          "idx": 0,
+          //1-8 返回请求数量，目前最多一次获取8张
+          "n": 1,
+          //地区zh-CN
+          "mkt": "zh-CN",
+        };
 
-    Map<String, dynamic> queryMap = {
-      //返回数据格式，不存在返回xml格式js (一般使用这个，返回json格式)xml（返回xml格式）
-      "format": "js",
-      //请求图片截止天数0 今天-1 截止中明天 （预准备的）1 截止至昨天，类推（目前最多获取到7天前的图片）
-      "idx": 0,
-      //1-8 返回请求数量，目前最多一次获取8张
-      "n": 1,
-      //地区zh-CN
-      "mkt": "zh-CN",
-    };
+        print(api);
+        Options options = Options()..responseType = ResponseType.plain;
+        Response response =
+            await Dio().get(api, queryParameters: queryMap, options: options);
+        BingBgInfoBean bingBgInfoBean =
+            BingBgInfoBean.fromJson(json.decode(response.toString()));
+        //获取图片地址
+        String picUrl = host + bingBgInfoBean.images[0].url;
+      }
+    } catch (e) {}
 
-    print(api);
-    Options options = Options()
-      ..responseType = ResponseType.plain;
-    Response response = await Dio().get(api, queryParameters: queryMap, options: options);
-    BingBgInfoBean bingBgInfoBean = BingBgInfoBean.fromJson(json.decode(response.toString()));
-    print(response.toString());
+    //返回bing图片url
+    String bingUrl =
+        "http://bing.ioliu.cn/v1/rand" + "?${DateTime.now().toIso8601String()}";
+    BgInfoBean bgInfoBean = BgInfoBean()
+      ..picUrl = bingUrl
+      ..picName = "必应壁纸";
 
-    return BgInfoBean()
-        ..picUrl = host +  bingBgInfoBean.images[0].url;
+    return bgInfoBean;
   }
-
 }
-
-
 
 ///Bing背景实体
 class BingBgInfoBean {
@@ -84,20 +95,20 @@ class Images {
 
   Images(
       {this.startdate,
-        this.fullstartdate,
-        this.enddate,
-        this.url,
-        this.urlbase,
-        this.copyright,
-        this.copyrightlink,
-        this.title,
-        this.quiz,
-        this.wp,
-        this.hsh,
-        this.drk,
-        this.top,
-        this.bot,
-        this.hs});
+      this.fullstartdate,
+      this.enddate,
+      this.url,
+      this.urlbase,
+      this.copyright,
+      this.copyrightlink,
+      this.title,
+      this.quiz,
+      this.wp,
+      this.hsh,
+      this.drk,
+      this.top,
+      this.bot,
+      this.hs});
 
   Images.fromJson(Map<String, dynamic> json) {
     startdate = json['startdate'];

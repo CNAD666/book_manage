@@ -1,4 +1,5 @@
-import 'file:///E:/Code/Flutter/book_web/lib/bean/home/home_bg_bean.dart';
+
+import 'package:book_web/bean/home/home_bg_bean.dart';
 
 homeBgBeanFromJson(HomeBgBean data, Map<String, dynamic> json) {
 	if (json['error'] != null) {

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:book_web/app/res/pic.dart';
 import 'package:book_web/app/utils/ui/auto_ui.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -116,14 +117,56 @@ Widget _bottomTipMsg() {
 
 ///右边登录布局
 Widget _rightLoginContent() {
-  return Container(
-    alignment: Alignment.center,
-    child: Text(
-      "登录布局",
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: auto(30),
+  return BlocBuilder<LoginBloc, LoginState>(builder: (context, state){
+    return Container(
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ///表述
+          Container(
+            margin: EdgeInsets.only(bottom: auto(50)),
+            child: Text("请选择登录方式"),
+          ),
+
+          ///登录选择
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                borderRadius: BorderRadius.circular(auto(40)),
+                onTap: () {
+                  BlocProvider.of<LoginBloc>(context).add(ToMainPageEvent(context));
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(auto(40)),
+                  child: Container(
+                    color: Colors.lightBlue,
+                    width: auto(80),
+                    height: auto(80),
+                    child: Image.asset(Pic.ICON_QQ),
+                  ),
+                ),
+              ),
+              Container(padding: EdgeInsets.only(right: auto(30))),
+              InkWell(
+                borderRadius: BorderRadius.circular(auto(40)),
+                onTap: () {
+                  BlocProvider.of<LoginBloc>(context).add(ToMainPageEvent(context));
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(auto(40)),
+                  child: Container(
+                    width: auto(80),
+                    height: auto(80),
+                    child: Image.asset(Pic.ICON_WX),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ],
       ),
-    ),
-  );
+    );
+  });
 }
