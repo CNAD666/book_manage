@@ -117,7 +117,7 @@ Widget _bottomTipMsg() {
 
 ///右边登录布局
 Widget _rightLoginContent() {
-  return BlocBuilder<LoginBloc, LoginState>(builder: (context, state){
+  return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
     return Container(
       alignment: Alignment.center,
       child: Column(
@@ -133,18 +133,21 @@ Widget _rightLoginContent() {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              InkWell(
-                borderRadius: BorderRadius.circular(auto(40)),
-                onTap: () {
-                  BlocProvider.of<LoginBloc>(context).add(ToMainPageEvent(context));
-                },
-                child: ClipRRect(
+              Material(
+                color: Colors.lightBlue,
+                child: InkWell(
                   borderRadius: BorderRadius.circular(auto(40)),
-                  child: Container(
-                    color: Colors.lightBlue,
-                    width: auto(80),
-                    height: auto(80),
-                    child: Image.asset(Pic.ICON_QQ),
+                  onTap: () {
+                    BlocProvider.of<LoginBloc>(context)
+                        .add(ToMainPageEvent(context));
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(auto(40)),
+                    child: Container(
+                      width: auto(80),
+                      height: auto(80),
+                      child: Image.asset(Pic.ICON_QQ),
+                    ),
                   ),
                 ),
               ),
@@ -152,7 +155,8 @@ Widget _rightLoginContent() {
               InkWell(
                 borderRadius: BorderRadius.circular(auto(40)),
                 onTap: () {
-                  BlocProvider.of<LoginBloc>(context).add(ToMainPageEvent(context));
+                  BlocProvider.of<LoginBloc>(context)
+                      .add(ToMainPageEvent(context));
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(auto(40)),
