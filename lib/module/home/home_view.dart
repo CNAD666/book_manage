@@ -12,22 +12,26 @@ import 'home_event.dart';
 
 class HomePage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+        Widget build(BuildContext context) {
+      return Scaffold(
       body: BlocProvider(
         create: (BuildContext context) => HomeBloc()..add(InitEvent()),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            ///页面整体的背景
-            _pageBg(),
+        child: InteractiveViewer(
+          minScale: 0.1,
+          maxScale: 2.0,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              ///页面整体的背景
+              _pageBg(),
 
-            ///背景上的内容体
-            _body(),
+              ///背景上的内容体
+              _body(),
 
-            ///切换图片时的加载效果
-            _loading(),
-          ],
+              ///切换图片时的加载效果
+              _loading(),
+            ],
+          ),
         ),
       ),
     );

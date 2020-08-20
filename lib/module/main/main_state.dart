@@ -8,9 +8,9 @@ class MainState {
 
   //PageView页面
   List<Widget> pageList = [
-    HomePage(),
+    Center(child: Text("页面一")),
     SettingPage(),
-    HomePage(),
+    Center(child: Text("页面三")),
   ];
 
   MainState({this.selectedIndex, this.isExtended});
