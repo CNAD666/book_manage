@@ -1,5 +1,6 @@
 # book_web
-
+- 项目效果
+  - http://cnad666.gitee.io/book_web
 - 学习(读水文千篇，不如看看bloc作者写的文档)
   - Flutter_Bloc起源：https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/
   - Flutter_Bloc模式优化：https://www.didierboelens.com/2018/12/reactive-programming-streams-bloc-practical-use-cases/
