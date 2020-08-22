@@ -60,7 +60,7 @@ class LoginLeftArea extends StatelessWidget {
           children: [
             ///上面显示文字
             Container(
-              padding: EdgeInsets.only(right: auto(120), top: auto(20)),
+              padding: EdgeInsets.only(right: auto(120), top: auto(5)),
               alignment: Alignment.topRight,
               child: Text(
                 state.loginTip.msg,

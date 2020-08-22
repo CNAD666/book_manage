@@ -25,9 +25,33 @@ class HomeBody extends StatelessWidget {
 
   ///主体body模块
   Widget _body() {
+    return Row(
+      children: [
+        ///左边区域
+        Expanded(
+          flex: 1,
+          child: Container(),
+        ),
+
+        ///中间区域
+        Expanded(
+          flex: 5,
+          child: _middleArea(),
+        ),
+
+        ///右边区域
+        Expanded(
+          flex: 1,
+          child: Container(),
+        )
+      ],
+    );
+  }
+
+  ///中间区域
+  Center _middleArea() {
     return Center(
       child: Container(
-        width: auto(1000),
         height: double.infinity,
         alignment: Alignment.center,
         child: Stack(

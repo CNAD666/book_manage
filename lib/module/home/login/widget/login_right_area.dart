@@ -33,7 +33,10 @@ class LoginRightArea extends StatelessWidget {
           ///表述
           Container(
             margin: EdgeInsets.only(bottom: auto(50)),
-            child: Text("请选择登录方式"),
+            child: Text(
+              "请选择登录方式",
+              style: TextStyle(fontSize: setSp(30)),
+            ),
           ),
 
           ///登录选择
@@ -41,35 +44,26 @@ class LoginRightArea extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Material(
-                color: Colors.lightBlue,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(auto(40)),
-                  onTap: () {
+                child: RawMaterialButton(
+                  onPressed: () {
                     onQQ();
                   },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(auto(40)),
-                    child: Container(
-                      width: auto(80),
-                      height: auto(80),
-                      child: Image.asset(Pic.ICON_QQ),
-                    ),
+                  child: Container(
+                    width: auto(80),
+                    height: auto(80),
+                    child: Image.asset(Pic.ICON_QQ),
                   ),
                 ),
               ),
               Container(padding: EdgeInsets.only(right: auto(30))),
-              InkWell(
-                borderRadius: BorderRadius.circular(auto(40)),
-                onTap: () {
+              RawMaterialButton(
+                onPressed: () {
                   onWX();
                 },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(auto(40)),
-                  child: Container(
-                    width: auto(80),
-                    height: auto(80),
-                    child: Image.asset(Pic.ICON_WX),
-                  ),
+                child: Container(
+                  width: auto(80),
+                  height: auto(80),
+                  child: Image.asset(Pic.ICON_WX),
                 ),
               )
             ],
