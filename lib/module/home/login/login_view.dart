@@ -11,8 +11,15 @@ import 'login_event.dart';
 import 'login_state.dart';
 
 class LoginPage extends StatelessWidget {
+  final String name;
+
+  LoginPage({this.name});
+
+
   @override
   Widget build(BuildContext context) {
+    print(name);
+
     return BlocProvider(
       create: (BuildContext context) => LoginBloc()..add(InitEvent()),
       child: Scaffold(

@@ -5,10 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'main_bloc.dart';
-import 'main_bloc.dart';
-import 'main_bloc.dart';
-import 'main_bloc.dart';
-import 'main_bloc.dart';
 import 'main_event.dart';
 import 'main_state.dart';
 
@@ -16,7 +12,8 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => MainBloc(),
+      ///在MainBloc上使用add方法,添加初始化事件
+      create: (BuildContext context) => MainBloc()..add(MainInitEvent()),
       child: BodyPage(),
     );
   }

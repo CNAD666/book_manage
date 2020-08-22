@@ -7,13 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'home_bloc.dart';
-import 'home_state.dart';
 import 'home_event.dart';
+import 'home_state.dart';
 
 class HomePage extends StatelessWidget {
   @override
-        Widget build(BuildContext context) {
-      return Scaffold(
+  Widget build(BuildContext context) {
+
+    return Scaffold(
       body: BlocProvider(
         create: (BuildContext context) => HomeBloc()..add(InitEvent()),
         child: InteractiveViewer(
@@ -145,7 +146,8 @@ Widget _firstRowFunction() {
           child: DropdownButtonHideUnderline(
             child: DropdownButton(
               items: state.bgInfoList
-                  .map((e) => DropdownMenuItem(value: e, child: Text(e.picName)))
+                  .map(
+                      (e) => DropdownMenuItem(value: e, child: Text(e.picName)))
                   .toList(),
               value: state.selectedBgType,
               onChanged: (value) {

@@ -1,6 +1,5 @@
-import 'package:fluro/fluro.dart';
-import 'package:flutter/cupertino.dart' hide Page;
-import 'package:flutter/material.dart' hide Page;
+import 'package:fluro/fluro.dart' ;
+import 'package:flutter/material.dart' hide Page,Router;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app/routes/application.dart';
