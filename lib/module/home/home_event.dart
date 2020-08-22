@@ -1,13 +1,10 @@
 import 'package:book_web/views/common/bg_info/bg_info.dart';
 import 'package:flutter/material.dart';
-import 'home_state.dart';
 
 @immutable
-abstract class HomeEvent {
-}
+abstract class HomeEvent {}
 
-class InitEvent extends HomeEvent {
-}
+class InitEvent extends HomeEvent {}
 
 ///更换被背景图
 class ChangeBgEvent extends HomeEvent {
@@ -35,9 +32,7 @@ class SwitchBgTypeEvent extends HomeEvent {
   SwitchBgTypeEvent(this.bgInfoBean);
 }
 
-
 ///切换隐藏控件
 class SwitchHideContainer extends HomeEvent {
   SwitchHideContainer();
 }
-

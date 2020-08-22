@@ -15,8 +15,7 @@ Handler homePageHandler = Handler(
 /// 登录
 Handler loginPageHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-    String name = params["name"].first;
-    return LoginPage(name: name,);
+    return LoginPage();
   },
 );
 

@@ -35,7 +35,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   ///初始化操作
-  Future<HomeState> _init() async{
+  Future<HomeState> _init() async {
     //初始化背景信息列表
     List<BgInfoBean> bgList = [
       //二次元动漫
@@ -48,8 +48,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       await BingBgInfoImpl().getBgInfo()
     ];
 
-    return state.clone()..bgInfoList = bgList
-        ..selectedBgType = bgList[0];
+    return state.clone()
+      ..bgInfoList = bgList
+      ..selectedBgType = bgList[0];
   }
 
   ///切换背景 小歪APi

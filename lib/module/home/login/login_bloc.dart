@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:book_web/app/routes/navigator_util.dart';
-import 'package:book_web/http/pic_url.dart';
 import 'package:book_web/views/common/bg_info/bg_info.dart';
 import 'package:book_web/views/common/bg_info/impl/bing_bg_info_impl.dart';
 import 'package:intl/intl.dart';
@@ -18,13 +17,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     /// 初始化操作
     if (event is InitEvent) {
       yield await _init();
-    }else if(event is ToMainPageEvent){
+    } else if (event is ToMainPageEvent) {
       _toMainPage(event);
     }
   }
 
   ///初始化操作
-  Future<LoginState> _init() async{
+  Future<LoginState> _init() async {
     DateFormat dateFormat = DateFormat("HH");
     String dateStr = dateFormat.format(DateTime.now());
     int a = int.parse(dateStr);
@@ -53,10 +52,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       ..loginTip.subMsg = "- ${bgInfoBean.picName}";
   }
 
-
-
-  void _toMainPage(ToMainPageEvent event){
+  void _toMainPage(ToMainPageEvent event) {
     NavigatorUtil.goMainPage(event.context);
   }
-
 }

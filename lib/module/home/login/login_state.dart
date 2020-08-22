@@ -1,4 +1,3 @@
-
 class LoginState {
   ///登录布局左边背景
   String loginBg;
