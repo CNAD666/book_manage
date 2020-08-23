@@ -14,11 +14,24 @@ class SettingPage extends StatelessWidget {
             Container(
               color: Colors.amberAccent,
             ),
-            Center(
-              child: Expanded(
-                child: Container(
-                  color: Colors.lightBlue,
-                ),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    color: Colors.lightBlue,
+                  ),
+                  ConstrainedBox(
+                    constraints:BoxConstraints(),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Container(color: Colors.deepOrange,),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             )
           ],
