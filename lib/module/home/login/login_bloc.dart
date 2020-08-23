@@ -15,7 +15,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     /// 初始化操作
-    if (event is InitEvent) {
+    if (event is LoginInitEvent) {
       yield await _init();
     } else if (event is ToMainPageEvent) {
       _toMainPage(event);

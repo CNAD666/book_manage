@@ -1,4 +1,3 @@
-import 'package:book_web/app/utils/ui/auto_ui.dart';
 import 'package:flutter/material.dart';
 
 import '../main_state.dart';
@@ -43,13 +42,15 @@ class LeftNavigationArea extends StatelessWidget {
 
     //底部widget
     Widget bottomWidget = Container(
-      alignment: Alignment.bottomCenter,
-      margin: EdgeInsets.only(top: auto(250)),
-      child: FloatingActionButton(
-        onPressed: () {
-          onExtend();
-        },
-        child: Icon(state.isExtended ? Icons.send : Icons.navigation),
+      child: Container(
+        color: Colors.lightBlue,
+        alignment: Alignment.bottomCenter,
+        child: FloatingActionButton(
+          onPressed: () {
+            onExtend();
+          },
+          child: Icon(state.isExtended ? Icons.send : Icons.navigation),
+        ),
       ),
     );
 
@@ -62,20 +63,12 @@ class LeftNavigationArea extends StatelessWidget {
           ? NavigationRailLabelType.none
           : NavigationRailLabelType.selected,
       //侧边栏中的item
-      destinations: [
-        NavigationRailDestination(
-            icon: Icon(Icons.add_to_queue),
-            selectedIcon: Icon(Icons.add_to_photos),
-            label: Text("测试一")),
-        NavigationRailDestination(
-            icon: Icon(Icons.add_circle_outline),
-            selectedIcon: Icon(Icons.add_circle),
-            label: Text("测试二")),
-        NavigationRailDestination(
-            icon: Icon(Icons.bubble_chart),
-            selectedIcon: Icon(Icons.broken_image),
-            label: Text("测试三")),
-      ],
+      destinations: state.itemList.map((item) {
+        return NavigationRailDestination(
+          icon: item.icon,
+          label: Text(item.title),
+        );
+      }).toList(),
       //顶部widget
       leading: topWidget,
 //    //底部widget

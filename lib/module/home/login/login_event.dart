@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 abstract class LoginEvent {}
 
 ///初始化操作
-class InitEvent extends LoginEvent {}
+class LoginInitEvent extends LoginEvent {}
 
 ///跳转后台管理页面
 class ToMainPageEvent extends LoginEvent {

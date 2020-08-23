@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+part of 'setting_bloc.dart';
 
 @immutable
 abstract class SettingState {}

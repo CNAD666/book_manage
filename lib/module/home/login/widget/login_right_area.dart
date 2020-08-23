@@ -26,6 +26,7 @@ class LoginRightArea extends StatelessWidget {
   ///右边登录布局
   Widget _loginContent() {
     return Container(
+      width: double.infinity,
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -40,8 +41,10 @@ class LoginRightArea extends StatelessWidget {
           ),
 
           ///登录选择
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Wrap(
+            alignment: WrapAlignment.start,
+            spacing: auto(30),
+            runSpacing: auto(20),
             children: [
               Material(
                 child: RawMaterialButton(
@@ -55,7 +58,6 @@ class LoginRightArea extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(padding: EdgeInsets.only(right: auto(30))),
               RawMaterialButton(
                 onPressed: () {
                   onWX();

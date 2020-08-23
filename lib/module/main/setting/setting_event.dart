@@ -1,5 +1,4 @@
-
-import 'package:flutter/widgets.dart';
+part of 'setting_bloc.dart';
 
 @immutable
 abstract class SettingEvent {}
