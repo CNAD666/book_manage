@@ -91,50 +91,53 @@ class HomeBody extends StatelessWidget {
 
   ///背景毛玻璃效果上的内容体
   Widget _firstRowFunction() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        ///切换页面背景类型
-        Padding(
-          padding: EdgeInsets.all(auto(10)),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton(
-              items: state.bgInfoList
-                  .map(
-                      (e) => DropdownMenuItem(value: e, child: Text(e.picName)))
-                  .toList(),
-              value: state.selectedBgType,
-              onChanged: (value) {
-                onBgTypeChange(value);
-              },
+    return Container(
+      width: double.infinity,
+      child: Wrap(
+        alignment: WrapAlignment.end,
+        children: [
+          ///切换页面背景类型
+          Padding(
+            padding: EdgeInsets.all(auto(10)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                items: state.bgInfoList
+                    .map(
+                        (e) => DropdownMenuItem(value: e, child: Text(e.picName)))
+                    .toList(),
+                value: state.selectedBgType,
+                onChanged: (value) {
+                  onBgTypeChange(value);
+                },
+              ),
             ),
           ),
-        ),
 
-        ///切换页面背景
-        Padding(
-          padding: EdgeInsets.all(auto(10)),
-          child: FlatButton.icon(
-            onPressed: () {
-              onBgChange();
-            },
-            label: Text("切换背景"),
-            icon: Icon(Icons.bubble_chart),
+          ///切换页面背景
+          Padding(
+            padding: EdgeInsets.all(auto(10)),
+            child: FlatButton.icon(
+              onPressed: () {
+                onBgChange();
+              },
+              label: Text("切换背景"),
+              icon: Icon(Icons.bubble_chart),
+            ),
           ),
-        ),
 
-        ///登录
-        Padding(
-          padding: EdgeInsets.all(auto(10)),
-          child: FlatButton.icon(
-            onPressed: () {
-              onLogin();
-            },
-            label: Text("登录"),
-            icon: Icon(Icons.person),
+          ///登录
+          Padding(
+            padding: EdgeInsets.all(auto(10)),
+            child: FlatButton.icon(
+              onPressed: () {
+                onLogin();
+              },
+              label: Text("登录"),
+              icon: Icon(Icons.person),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
