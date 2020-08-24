@@ -22,15 +22,16 @@ class SettingPage extends StatelessWidget {
                     color: Colors.lightBlue,
                   ),
                   ConstrainedBox(
-                    constraints:BoxConstraints(),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Container(color: Colors.deepOrange,),
-                        ),
-                      ],
-                    ),
-                  )
+                      constraints: BoxConstraints(),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              color: Colors.deepOrange,
+                            ),
+                          ),
+                        ],
+                      ))
                 ],
               ),
             )
