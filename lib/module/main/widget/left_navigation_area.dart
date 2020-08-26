@@ -42,13 +42,14 @@ class LeftNavigationArea extends StatelessWidget {
 
     //底部widget
     Widget bottomWidget = Container(
-      child: IntrinsicHeight(
-        child: Column(
-          children: [
-            Expanded(
-              child: Container(color: Colors.deepOrange,),
-            ),
-          ],
+      child: Container(
+        margin: EdgeInsets.only(top: 330),
+        alignment: Alignment.bottomCenter,
+        child: FloatingActionButton(
+          onPressed: () {
+            onExtend();
+          },
+          child: Icon(state.isExtended ? Icons.send : Icons.navigation),
         ),
       ),
     );
