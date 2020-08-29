@@ -1,4 +1,4 @@
-# book_web
+# book_web_mange
 - 项目效果
   - http://cnad666.gitee.io/book_web
 - 学习(读水文千篇，不如看看bloc作者写的文档)
@@ -11,4 +11,4 @@
   - flutter_bloc：https://pub.dev/packages/flutter_bloc
 - 接口
   - 后端接口使用go+beego开发，这玩意就不public了
-
+ 
