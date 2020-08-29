@@ -1,4 +1,4 @@
-import 'package:book_web/views/common/bg_info/bg_info.dart';
+import 'package:book_web/app/common/bg_info/bg_info.dart';
 import 'package:flutter/material.dart';
 
 @immutable

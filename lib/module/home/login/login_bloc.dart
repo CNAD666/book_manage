@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:book_web/app/common/bg_info/bg_info.dart';
+import 'package:book_web/app/common/bg_info/impl/bing_bg_info_impl.dart';
 import 'package:book_web/app/routes/navigator_util.dart';
-import 'package:book_web/views/common/bg_info/bg_info.dart';
-import 'package:book_web/views/common/bg_info/impl/bing_bg_info_impl.dart';
 import 'package:intl/intl.dart';
 
 import 'login_event.dart';

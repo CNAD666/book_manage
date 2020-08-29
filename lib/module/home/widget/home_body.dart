@@ -1,8 +1,8 @@
 import 'dart:ui';
 
+import 'package:book_web/app/common/bg_info/bg_info.dart';
 import 'package:book_web/app/utils/ui/auto_ui.dart';
 import 'package:book_web/module/home/home_state.dart';
-import 'package:book_web/views/common/bg_info/bg_info.dart';
 import 'package:flutter/material.dart';
 
 typedef HomeChangeBgTypeCallback = void Function(BgInfoBean bgInfoBean);

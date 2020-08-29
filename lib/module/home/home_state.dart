@@ -1,5 +1,5 @@
+import 'package:book_web/app/common/bg_info/bg_info.dart';
 import 'package:book_web/http/pic_url.dart';
-import 'package:book_web/views/common/bg_info/bg_info.dart';
 
 class HomeState {
   ///是否出入loading状态

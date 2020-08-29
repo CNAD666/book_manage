@@ -1,9 +1,9 @@
+import 'package:book_web/app/common/bg_info/bg_info.dart';
+import 'package:book_web/app/common/bg_info/impl/anime_bg_info_impl.dart';
+import 'package:book_web/app/common/bg_info/impl/bing_bg_info_impl.dart';
+import 'package:book_web/app/common/bg_info/impl/hd_sights_bg_info_impl.dart';
+import 'package:book_web/app/common/bg_info/impl/mc_anime_bg_info_impl.dart';
 import 'package:book_web/app/routes/navigator_util.dart';
-import 'package:book_web/views/common/bg_info/bg_info.dart';
-import 'package:book_web/views/common/bg_info/impl/anime_bg_info_impl.dart';
-import 'package:book_web/views/common/bg_info/impl/bing_bg_info_impl.dart';
-import 'package:book_web/views/common/bg_info/impl/hd_sights_bg_info_impl.dart';
-import 'package:book_web/views/common/bg_info/impl/mc_anime_bg_info_impl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'home_event.dart';
