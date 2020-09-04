@@ -3,6 +3,7 @@
   - [http://cnad666.gitee.io/book_web_manage](http://cnad666.gitee.io/book_web_manage)
  
 # 状态管理
+**项目使用flutter_redux开发**
 - flutter_bloc使用
   - 教程：[掘金：flutter_bloc使用解析---骚年，你还在手搭bloc吗！](https://juejin.im/post/6856268776510504968)
     - 备用：[CSDN：flutter_bloc使用解析---骚年，你还在手搭bloc吗！](https://blog.csdn.net/CNAD666/article/details/107744163)
