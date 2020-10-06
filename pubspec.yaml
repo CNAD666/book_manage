@@ -32,18 +32,24 @@ dependencies:
   characters: ^1.0.0
   dio: ^3.0.10    #网络请求框架
   intl: ^0.16.1   #解析json中date类型需要的
-  json_annotation: ^2.4.0 # json序列化和反序列化用的
   flutter_screenutil: ^1.0.2  # 界面适配
   extended_image: ^1.1.0 #图片功能扩展
   fluro: ^1.6.3 #路由管理框架
+  # https://pub.dev/packages/flutter_hooks
+  flutter_hooks: ^0.14.1 #分离状态逻辑和视图逻辑
+  # https://pub.dev/packages/json_serializable
+  json_serializable: ^3.5.0 #json库
+  json_annotation: ^3.1.0 # json序列化和反序列化用的
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  json_serializable: ^3.5.0
+  build_runner: ^1.6.5 # 用于自动生成代码
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
 
