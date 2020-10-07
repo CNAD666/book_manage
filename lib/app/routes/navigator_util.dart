@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 import 'application.dart';
@@ -8,7 +6,6 @@ import 'routes.dart';
 class NavigatorUtil {
   /// 返回上级页面
   static void goBack(BuildContext context) {
-    Navigator.pop(context);
     Application.router.pop(context);
   }
 

@@ -16,7 +16,12 @@ class HomeBody extends StatelessWidget {
   final HomeChangeBgCallback onBgChange;
   final HomeToLoginCallback onLogin;
 
-  HomeBody({this.state, this.onBgTypeChange, this.onBgChange, this.onLogin});
+  HomeBody({
+    this.state,
+    this.onBgTypeChange,
+    this.onBgChange,
+    this.onLogin,
+  });
 
   @override
   Widget build(BuildContext context) {

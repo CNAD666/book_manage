@@ -15,12 +15,12 @@ num setHeight(num size){
 //适配文字
 num setSp(num size){
 //  return ScreenUtil().setSp(size);
-  return size;
+  return size.toDouble();
 }
 
 //自动适配,后面方便扩展
 num auto(num size){
-  return size;
+  return size.toDouble();
 }
 
 

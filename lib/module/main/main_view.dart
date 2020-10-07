@@ -15,6 +15,7 @@ class MainPage extends StatelessWidget {
       ///在MainBloc上使用add方法,添加初始化事件
       create: (BuildContext context) => MainBloc()..add(MainInitEvent()),
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: _body(),
       ),
     );

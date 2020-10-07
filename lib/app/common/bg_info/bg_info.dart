@@ -22,11 +22,12 @@ class BgInfoBean {
   ///一些其他信息
   dynamic other;
 
-  BgInfoBean(
-      {this.picUrl,
-      this.picName,
-      this.time,
-      this.author,
-      this.description,
-      this.other});
+  BgInfoBean({
+    this.picUrl,
+    this.picName,
+    this.time,
+    this.author,
+    this.description,
+    this.other,
+  });
 }

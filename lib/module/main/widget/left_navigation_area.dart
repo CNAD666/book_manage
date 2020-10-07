@@ -1,3 +1,6 @@
+import 'package:book_web/app/routes/navigator_util.dart';
+import 'package:book_web/app/typedef/function.dart';
+import 'package:book_web/app/utils/ui/auto_ui.dart';
 import 'package:flutter/material.dart';
 
 import '../main_state.dart';
@@ -6,23 +9,26 @@ import '../main_state.dart';
 typedef MainExtendCallback = void Function();
 
 ///侧边栏item点击监听
-typedef MainNavigationItemCallback = void Function(int index);
 
 ///NavigationRail组件为侧边栏
 class LeftNavigationArea extends StatelessWidget {
   final MainState state;
-  final MainExtendCallback onExtend;
-  final MainNavigationItemCallback onItem;
+  final ParamVoidCallback onExtend;
+  final ParamSingleCallback onItem;
 
-  LeftNavigationArea({this.state, this.onExtend, this.onItem});
+  LeftNavigationArea({
+    this.state,
+    this.onExtend,
+    this.onItem,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return _navigationRailSide();
+    return _navigationRailSide(context);
   }
 
   //增加NavigationRail组件为侧边栏
-  Widget _navigationRailSide() {
+  Widget _navigationRailSide(BuildContext context) {
     //顶部widget
     Widget topWidget = Center(
       child: Padding(
@@ -43,19 +49,36 @@ class LeftNavigationArea extends StatelessWidget {
     //底部widget
     Widget bottomWidget = Container(
       child: Container(
-        margin: EdgeInsets.only(top: 330),
+        margin: EdgeInsets.only(top: 300),
         alignment: Alignment.bottomCenter,
-        child: FloatingActionButton(
-          onPressed: () {
-            onExtend();
-          },
-          child: Icon(state.isExtended ? Icons.send : Icons.navigation),
+        child: Wrap(
+          direction: Axis.vertical,
+          spacing: auto(20),
+          children: [
+            //展开按钮
+            FloatingActionButton(
+              onPressed: () {
+                onExtend();
+              },
+              heroTag: 'extend',
+              child: Icon(state.isExtended ? Icons.send : Icons.navigation),
+            ),
+
+            //关闭页面按钮
+            FloatingActionButton(
+              onPressed: () {
+                NavigatorUtil.goBack(context);
+              },
+              heroTag: 'close',
+              child: Icon(Icons.clear),
+            ),
+          ],
         ),
       ),
     );
 
     return NavigationRail(
-      backgroundColor: Colors.white12,
+      backgroundColor: Colors.white,
       //阴影Z轴高度
       elevation: 3,
       extended: state.isExtended,
