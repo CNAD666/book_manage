@@ -102,8 +102,8 @@ class HomeBody extends StatelessWidget {
             child: DropdownButtonHideUnderline(
               child: DropdownButton(
                 items: state.bgInfoList
-                    .map(
-                        (e) => DropdownMenuItem(value: e, child: Text(e.picName)))
+                    .map((e) =>
+                        DropdownMenuItem(value: e, child: Text(e.picName)))
                     .toList(),
                 value: state.selectedBgType,
                 onChanged: (value) {
