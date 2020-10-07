@@ -1,11 +1,9 @@
-import 'package:json_annotation/json_annotation.dart'; 
-  
+import 'package:json_annotation/json_annotation.dart';
+
 part 'home_bg_x_w_bean.g.dart';
 
-
 @JsonSerializable()
-  class HomeBgXWBean extends Object {
-
+class HomeBgXWBean extends Object {
   @JsonKey(name: 'code')
   String code;
 
@@ -18,12 +16,15 @@ part 'home_bg_x_w_bean.g.dart';
   @JsonKey(name: 'height')
   String height;
 
-  HomeBgXWBean(this.code,this.imgurl,this.width,this.height,);
+  HomeBgXWBean(
+    this.code,
+    this.imgurl,
+    this.width,
+    this.height,
+  );
 
-  factory HomeBgXWBean.fromJson(Map<String, dynamic> srcJson) => _$HomeBgXWBeanFromJson(srcJson);
+  factory HomeBgXWBean.fromJson(Map<String, dynamic> srcJson) =>
+      _$HomeBgXWBeanFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$HomeBgXWBeanToJson(this);
-
 }
-
-  
