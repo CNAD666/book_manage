@@ -1,7 +1,26 @@
-import 'package:book_web/generated/json/base/json_convert_content.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-class HomeBgBean with JsonConvert<HomeBgBean> {
-	int error;
-	int result;
-	String img;
+part 'home_bg_bean.g.dart';
+
+@JsonSerializable()
+class HomeBgBean extends Object {
+  @JsonKey(name: 'error')
+  int error;
+
+  @JsonKey(name: 'result')
+  int result;
+
+  @JsonKey(name: 'img')
+  String img;
+
+  HomeBgBean(
+    this.error,
+    this.result,
+    this.img,
+  );
+
+  factory HomeBgBean.fromJson(Map<String, dynamic> srcJson) =>
+      _$HomeBgBeanFromJson(srcJson);
+
+  Map<String, dynamic> toJson() => _$HomeBgBeanToJson(this);
 }

@@ -45,7 +45,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  json_serializable: ^3.5.0
   build_runner: ^1.6.5 # 用于自动生成代码
 
 # For information on the generic Dart part of this file, see the
