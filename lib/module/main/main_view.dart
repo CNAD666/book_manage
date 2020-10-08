@@ -1,5 +1,5 @@
 import 'package:book_web/module/main/main_bloc.dart';
-import 'package:book_web/module/main/widget/left_navigation_area.dart';
+import 'package:book_web/module/main/widget/side_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,11 +31,9 @@ Widget _body() {
       return Row(
         children: [
           ///侧边栏区域
-          LeftNavigationArea(
-            state: state,
-            onExtend: () {
-              context.bloc<MainBloc>().add(IsExtendEvent());
-            },
+          SideNavigation(
+            selectedIndex: state.selectedIndex,
+            sideItems: state.itemList,
             onItem: (index) {
               context
                   .bloc<MainBloc>()
