@@ -12,17 +12,15 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => LoginBloc()..add(LoginInitEvent()),
-      child: Scaffold(
-        body: _body(),
-      ),
+      child: BlocBuilder<LoginBloc, LoginState>(builder: _body),
     );
   }
 }
 
 ///主体内容：该主体分左右俩部分  左边：图片背景  右边：登陆相关信息
-Widget _body() {
-  return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-    return Row(
+Widget _body(BuildContext context, LoginState state) {
+  return Scaffold(
+    body: Row(
       children: [
         ///左边区域,背景图+相关文字
         Expanded(
@@ -46,6 +44,6 @@ Widget _body() {
           ),
         )
       ],
-    );
-  });
+    ),
+  );
 }

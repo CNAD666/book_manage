@@ -12,54 +12,52 @@ import 'home_state.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _body(),
+    return BlocProvider(
+      create: (BuildContext context) => HomeBloc()..add(InitEvent()),
+      child: BlocBuilder<HomeBloc, HomeState>(builder: _body),
     );
   }
 }
 
-Widget _body() {
-  return BlocProvider(
-    create: (BuildContext context) => HomeBloc()..add(InitEvent()),
-    child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-      return Stack(
-        fit: StackFit.expand,
-        children: [
-          ///页面整体的背景
-          HomeBg(
-            state: state,
-            onLoading: () {
-              context.bloc<HomeBloc>().add(StatusSwitchEvent(true));
-            },
-            onComplete: () {
-              context.bloc<HomeBloc>().add(StatusSwitchEvent(false));
-            },
-            onFail: () {
-              context.bloc<HomeBloc>().add(StatusSwitchEvent(false));
-            },
-          ),
+Widget _body(BuildContext context, HomeState state) {
+  return Scaffold(
+    body: Stack(
+      fit: StackFit.expand,
+      children: [
+        ///页面整体的背景
+        HomeBg(
+          state: state,
+          onLoading: () {
+            context.bloc<HomeBloc>().add(StatusSwitchEvent(true));
+          },
+          onComplete: () {
+            context.bloc<HomeBloc>().add(StatusSwitchEvent(false));
+          },
+          onFail: () {
+            context.bloc<HomeBloc>().add(StatusSwitchEvent(false));
+          },
+        ),
 
-          ///背景上的内容体
-          HomeBody(
-            state: state,
-            onBgTypeChange: (value) {
-              context.bloc<HomeBloc>().add(SwitchBgTypeEvent(value));
-            },
-            onBgChange: () {
-              context.bloc<HomeBloc>().add(ChangeBgEvent());
-            },
-            onLogin: () {
-              context.bloc<HomeBloc>().add(ToLoginEvent(context));
-            },
-          ),
+        ///背景上的内容体
+        HomeBody(
+          state: state,
+          onBgTypeChange: (value) {
+            context.bloc<HomeBloc>().add(SwitchBgTypeEvent(value));
+          },
+          onBgChange: () {
+            context.bloc<HomeBloc>().add(ChangeBgEvent());
+          },
+          onLogin: () {
+            context.bloc<HomeBloc>().add(ToLoginEvent(context));
+          },
+        ),
 
-          ///切换图片时的加载效果
-          HomeLoadingAnimation(
-            state: state,
-          )
-        ],
-      );
-    }),
+        ///切换图片时的加载效果
+        HomeLoadingAnimation(
+          state: state,
+        )
+      ],
+    ),
   );
 }
 

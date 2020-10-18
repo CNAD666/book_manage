@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class MainState {
   int selectedIndex;
   bool isExtended;
+  PageController pageController;
 
   ///Navigation的item信息
   List<ItemInfoBean> itemList;
@@ -40,6 +41,7 @@ class MainState {
 
     return MainState()
       ..selectedIndex = 0
+      ..pageController = PageController()
       ..isExtended = false
       ..itemList = itemList
       ..pageList = pageList;
