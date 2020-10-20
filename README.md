@@ -6,7 +6,7 @@
 **项目使用flutter_bloc开发**
 - flutter_bloc使用
   - 教程：[掘金：flutter_bloc使用解析---骚年，你还在手搭bloc吗！](https://juejin.im/post/6856268776510504968)
-    - 备用：[CSDN：flutter_bloc使用解析---骚年，你还在手搭bloc吗！](https://blog.csdn.net/CNAD666/article/details/107744163)
+    - 备用：[博客园：flutter_bloc使用解析---骚年，你还在手搭bloc吗！](https://www.cnblogs.com/xdd666/p/13802923.html)
   - [代码demo地址](https://github.com/CNAD666/book_web_manage)
 
 ## 其他
