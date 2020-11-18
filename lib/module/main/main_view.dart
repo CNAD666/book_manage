@@ -31,7 +31,7 @@ Widget _body(BuildContext context, MainState state) {
         selectedIndex: state.selectedIndex,
         sideItems: state.itemList,
         onItem: (index) {
-          context.bloc<MainBloc>().add(SwitchTabEvent(selectedIndex: index));
+          BlocProvider.of<MainBloc>(context).add(SwitchTabEvent(selectedIndex: index));
           state.pageController.jumpToPage(index);
         },
       ),

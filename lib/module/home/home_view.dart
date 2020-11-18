@@ -28,13 +28,13 @@ Widget _body(BuildContext context, HomeState state) {
         HomeBg(
           state: state,
           onLoading: () {
-            context.bloc<HomeBloc>().add(StatusSwitchEvent(true));
+            BlocProvider.of<HomeBloc>(context).add(StatusSwitchEvent(true));
           },
           onComplete: () {
-            context.bloc<HomeBloc>().add(StatusSwitchEvent(false));
+            BlocProvider.of<HomeBloc>(context).add(StatusSwitchEvent(false));
           },
           onFail: () {
-            context.bloc<HomeBloc>().add(StatusSwitchEvent(false));
+            BlocProvider.of<HomeBloc>(context).add(StatusSwitchEvent(false));
           },
         ),
 
@@ -42,13 +42,13 @@ Widget _body(BuildContext context, HomeState state) {
         HomeBody(
           state: state,
           onBgTypeChange: (value) {
-            context.bloc<HomeBloc>().add(SwitchBgTypeEvent(value));
+            BlocProvider.of<HomeBloc>(context).add(SwitchBgTypeEvent(value));
           },
           onBgChange: () {
-            context.bloc<HomeBloc>().add(ChangeBgEvent());
+            BlocProvider.of<HomeBloc>(context).add(ChangeBgEvent());
           },
           onLogin: () {
-            context.bloc<HomeBloc>().add(ToLoginEvent(context));
+            BlocProvider.of<HomeBloc>(context).add(ToLoginEvent(context));
           },
         ),
 
@@ -68,7 +68,8 @@ Widget _otherContent(BuildContext context, HomeState state) {
     Container(
       padding: EdgeInsets.only(bottom: auto(10)),
       child: FloatingActionButton(
-        onPressed: () => context.bloc<HomeBloc>().add(SwitchHideContainer()),
+        onPressed: () =>
+            BlocProvider.of<HomeBloc>(context).add(SwitchHideContainer()),
         child: Text("切换"),
       ),
     ),
